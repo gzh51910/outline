@@ -23,6 +23,10 @@
 * CommonJS规范模块分类
     * 内置模块：NodeJS内部模块
         > 引入方式：require(模块名))
+    * 自定义模块
+        * 定义：module.exports
+        * 引用：require(相对路径)
+    * 第三模块
 
 * 静态资源服务器
     * Apache
@@ -30,3 +34,21 @@
         * response  响应（服务器给客户端的内容）
     * 客户端
         * request   请求（客户端给服务器的内容）
+    ```html
+        <script src="http://www.baidu.com/js/laoxie.js">
+        <img src="xxx">
+        <link href="">
+        ajax
+    ```
+    * mime类型
+* npm
+    * 全局安装
+    * 项目安装
+* 文件的操作:fs模块
+    * 读取：
+        * fs.readFile()
+        * fs.readFileSync()
+    * 写入
+    * 全局变量
+        * __dirname ： 当前文件所在目录
+        * __filename ： 当前文件地址
