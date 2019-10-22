@@ -99,6 +99,45 @@
             * 分类
                 * 内置中间
                     * express.static()
+                * 自定义中间
+                    > 中间件是一个函数，参数为request,response,next()
+                    * request 请求对象，保存客户端信息
+                    * response 响应对象，保存服务端信息
+                    * next()：是否进入下一个中间件的方法
+
         ```js
             app.use(express.static('./'))
         ```
+
+* git操作
+    1. 得到仓库地址url (https or ssh)
+    2. 克隆：`git clone <url>`
+    3. 更新：`git pull origin master` （每天操作）
+* 接口编写(路由编写)
+    * 接口地址
+        * 商品
+            * 商品列表
+            * 商品详情
+        * 注册
+            * 添加一个用户
+        * 登录
+            * 
+    * RESTful规范接口
+        * 根据请求类型不同定义不同的接口
+            * get           查
+            * post          增
+            * patch/put     改
+            * delete        删
+        * 根据不同的地址实现不同的接口
+            * get       /goods          所有商品
+            * post      /goods          增加商品
+            * get       /goods/:id      单个商品
+            * delete    /goods/:id      删除商品
+            * patch/put /goods/:id      修改商品（patch部分修改，put完全修改）
+    * 接口测试工具
+        * postman
+    * 接收参数
+        * 动态路由：request.params
+        * url参数（?后面的参数）：req.query
+        * 请求体参数（post,patch）：req.body
+            > 必须借助第三方中间件来获取

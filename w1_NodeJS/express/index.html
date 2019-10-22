@@ -10,5 +10,13 @@
 <body>
     <h1>首页</h1>
     <img src="img/g3.jpg"/>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log(xhr.responseText)
+        }
+        xhr.open('get','http://localhost:1910/goods',true);
+        xhr.send();
+    </script>
 </body>
 </html>
