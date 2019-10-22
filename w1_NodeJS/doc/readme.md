@@ -15,8 +15,6 @@
 
         });
         console.log(jq);//undefined
-
-
         let http = require('http');
         console.log(http);
     ```
@@ -52,3 +50,55 @@
     * 全局变量
         * __dirname ： 当前文件所在目录
         * __filename ： 当前文件地址
+
+
+## day1-2
+
+### 复习
+* 模块化开发
+    *   规范      框架            区别              定义与引入
+        AMD         require.js      前端+异步       define + require()
+        CMD         sea.js          前端+异步
+        CommonJS    node.js         后端+同步       module.exports + require()
+        ESModule    ECMAScript      前端+同步
+    * CommonJS模块分类
+        * 内置模块
+        * 自定义模块
+            * 定义  module.exports/exports
+            * 引入  require()
+        * 第三方模块
+            * 安装npm
+        * 文件模块
+            > 一般指json文件
+* 服务器
+    * 客户端与服务器
+        * 前端JS = ECMAScript+BOM+DOM
+        * 后端JS = ECMAScript+I/O
+    * 一个请求的细节
+        * 请求request
+        * 响应response
+            * Content-Type
+    * 静态资源服务器
+        * http  创建一个服务器
+        * url   处理请求地址
+        * path  处理文件地址
+        * fs    文件处理
+    * 全局变量
+        * __dirname     当前文件所在的目录地址
+        * __filename    当前文件所在地址
+
+### 知识点
+* 第三方模块
+    * 安装： npm
+        * 全局安装：为了在命令行使用
+        * 项目安装：为了在代码中引用require
+    * express
+        * 中间件Middleware
+            * 定义：在到达目的前进行操作
+            * 使用: `app.use(middleware)`
+            * 分类
+                * 内置中间
+                    * express.static()
+        ```js
+            app.use(express.static('./'))
+        ```
