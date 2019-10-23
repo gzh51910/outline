@@ -8,7 +8,7 @@ const {PORT}  = require('./config.json');
 let app = express();
 
 // 静态资源服务器
-app.use(express.static('./',{maxAge:1000*10}));
+app.use(express.static('./',{maxAge:1000*10}));//静态资源服务器如果找不到文件，自动调用next
 
 // @测试中间件
 // let myMiddleware = function(req,res){
@@ -16,6 +16,12 @@ app.use(express.static('./',{maxAge:1000*10}));
 // }
 // app.use((req,res,next)=>{
 //     console.log('tingting');
+//     res.write('abc');
+//     next()
+// })
+// app.use((req,res,next)=>{
+//     console.log('tingting');
+//     res.send('cba')
 //     next()
 // })
 // app.use('/laoxie',(req,res,next)=>{
