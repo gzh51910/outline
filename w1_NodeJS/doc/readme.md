@@ -153,7 +153,7 @@
     * 根据不同的地址实现不同的接口
 * 编写接口
     * 利用模块化思想实现接口与路由的编写
-* 接收前端出入的参数
+* 接收前端传入的参数
     * url参数       req.query
     * 动态路由      req.params
     * 请求体参数    req.body
@@ -162,3 +162,18 @@
 * 路由模块化
     * 利用commonJS规范把路由分离到单独的文件中
     * 利用中间件把所有模块组合成一个完成的应用
+* Promise对象
+    * 状态
+        * Pending   初始状态
+        * Resolved  成功状态
+        * Rejected  失败状态
+        > 状态只能从Pending改成Resolved或从Pending改成Rejected
+    * 应用场景
+        * 解决回调地狱
+        * 方法的封装
+    * ES7的async & await
+        * await 用于等待Promise对象的返回结果
+            > await不能单独使用，必须放在async函数中
+        * async 是函数定义的关键字，利用async定义的函数会返回一个Promise对象
+            > async函数中的返回值，就是promise状态为Resolved时的值
+        >让我们以同步的代码实现异步编程
