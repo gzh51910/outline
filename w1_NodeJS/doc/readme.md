@@ -177,3 +177,99 @@
         * async 是函数定义的关键字，利用async定义的函数会返回一个Promise对象
             > async函数中的返回值，就是promise状态为Resolved时的值
         >让我们以同步的代码实现异步编程
+
+## day1-4
+
+### 复习
+* 路由模块化
+    * CommonJS
+    * 中间件：express.Router()
+* express中间件
+    * 内置
+        * express.static()
+        * express.json()        
+        * express.urlencoded()
+        * express.Router()
+    * 自定义中间件
+        * 是一个函数，格式：`function(req,res,next){}`
+    * 第三方中间
+        * body-parser
+        * mysql
+* mySQL
+    * 如何在nodejs中使用mysql
+        * 通过连接对象
+        * 通过连接池
+    * sql语句的编写
+* Promise
+    * async
+    * await
+```js
+    function getData(url,callback){
+        let data;
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            data = xhr.responseText;
+
+            callback(data)
+        }
+        xhr.open('get',url,true);
+        xhr.send();
+
+        return data;
+    }
+
+    let data = getData('/goods/123');
+    console.log(data);//undefined
+
+    // 利用回调函数来获取异步请求的数据
+    getData('/goods/10086',function(data){
+        console.log(data)
+    });
+
+
+    // 利用Promise改造
+    function getData(url){
+        return new Promise((resolve,reject)=>{
+
+            let data;
+            let xhr = new XMLHttpRequest();
+            xhr.onload = ()=>{
+                data = xhr.responseText;
+    
+                resolve(data)
+            }
+            xhr.open('get',url,true);
+            xhr.send();
+        })
+    }
+
+    getData('/goods/10086').then(data=>{
+        console.log(data)
+    })
+
+    (async function(){
+       let data = await getData('/goods/10086')
+    })();
+
+```
+    
+### 知识点
+* 跨域解决方案
+    * 为什么会存在跨域: 安全性问题（一切的根源：js是一门客户端语言）
+    * 解决方案
+        * jsonp  json with padding
+            * 步骤
+                1. 创建全局函数
+                2. 利用script标签发起请求，并发送全局函数名
+                3. 后端接收全局函数名，并返回函数执行的js代码，顺便出入数据
+            * 缺点
+                * 只能get请求
+                * 不是一个ajax请求
+        * CORS   Cross Origin Resource Sharing
+            * 一个真正的ajax跨域请求方案
+            * 操作步骤
+                1. 设置响应头
+                   * Access-Control-Allow-Origin
+                   * Access-Control-Allow-Headers
+                   * Access-Control-Allow-Methods
+        * 服务器代理

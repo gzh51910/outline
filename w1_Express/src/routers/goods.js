@@ -9,6 +9,7 @@ const query = require('../db/myql');
 
 // @查询所有商品
 Router.get('/',async (req,res)=>{
+    
     // 查询数据库：
     let sql = `select * from goods`;
     // connection.connect();
@@ -47,6 +48,15 @@ Router.get('/',async (req,res)=>{
     res.send(data);
 })
 
+Router.get('/jsonp',async (req,res)=>{
+    let {callback} = req.query;
+
+    let sql = `select * from goods`;
+    let data = await query(sql);
+    
+    res.send(`${callback}(${JSON.stringify(data)})`);
+})
+
 // @添加商品
 Router.post('/',async (req,res)=>{
     // let {name,price,imgurl,category} = req.body;
@@ -69,6 +79,7 @@ Router.post('/',async (req,res)=>{
 
 // @查询单个商品
 Router.get('/:id',(req,res)=>{
+    
     let {id} = req.params;
     // 查询数据：
     let sql = `select * from goods where id=${id}`;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+</head>
+<body>
+    <h1>跨域解决方案</h1>
+    <script>
+        // CORS简单请求
+        // let xhr = new XMLHttpRequest();
+        // xhr.onload = ()=>{
+        //     console.log('CORS:',JSON.parse(xhr.responseText));
+        // }
+        // xhr.open('get','http://localhost:1910/goods',true);
+        // xhr.send();
+
+
+        // CORS 复杂请求
+        // 浏览器会自动发起OPTIONS请求（预请求，探路请求）
+        let xhr = new XMLHttpRequest();
+        xhr.onload = ()=>{
+            console.log('CORS:',xhr.responseText);
+        }
+        xhr.open('delete','http://localhost:1910/goods/1',true);
+        xhr.send();
+
+        /**
+         * @跨域解决方案之JSONP
+            * 步骤
+                1. 创建全局函数
+                2. 利用script标签发起请求，并发送全局函数名
+                3. 后端接收全局函数名，并返回函数执行的js代码，顺便出入数据
+         */ 
+        
+        //  必须为全局函数
+        function fetch(data){
+            console.log('jsonp:',data);
+
+            document.body.removeChild(script)
+         }
+
+         let script = document.createElement("script");
+         script.src="http://localhost:1910/goods/jsonp?callback=fetch"
+        
+        //  把script标签写入页面
+        document.body.appendChild(script);
+    </script>
+</body>
+</html>
