@@ -6,6 +6,7 @@ let loginRouter = require('./login');
 let goodsRouter = require('./goods');
 let userRouter = require('./user');
 let regRouter = require('./reg');
+let proxyRouter = require('./proxy');
 
 // 跨域解决方案CORS
 Router.use((req,res,next)=>{
@@ -36,6 +37,12 @@ Router.use('/login',loginRouter)
 Router.use('/goods',goodsRouter)
 Router.use('/user',userRouter)
 Router.use('/reg',regRouter)
+Router.use('/proxy',proxyRouter)
+
+// SSR
+// Router.use('ssr',(req,res)=>{
+//     res.send('<div>sklsdklflksl</div>')
+// })
 
 
 // 必须导出（暴露）一个中间件

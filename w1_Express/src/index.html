@@ -25,7 +25,10 @@
             console.log('CORS:',xhr.responseText);
         }
         xhr.open('delete','http://localhost:1910/goods/1',true);
-        xhr.send();
+
+        // 设置请求头
+        xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+        xhr.send('username=laoxie&password=1234567');
 
         /**
          * @跨域解决方案之JSONP

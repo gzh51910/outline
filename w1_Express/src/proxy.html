@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>服务器代理</title>
+</head>
+<body>
+    <h1>跨域解决方案之服务器代理</h1>
+    <script>
+        // 目标接口：http://www.egu365.com/head.action
+        let xhr = new XMLHttpRequest()
+        xhr.onload = ()=>{
+            console.log(xhr.responseText);
+        }
+        // xhr.open('get','http://localhost:1910/proxy/egu/head.action',true);
+        xhr.open('get','http://localhost:1910/proxy/egu/newSlide.action',true);
+        xhr.send();
+    </script>
+</body>
+</html>

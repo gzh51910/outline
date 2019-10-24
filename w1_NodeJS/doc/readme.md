@@ -272,4 +272,33 @@
                    * Access-Control-Allow-Origin
                    * Access-Control-Allow-Headers
                    * Access-Control-Allow-Methods
+                2. 处理复杂跨域中的OPTIONS请求
         * 服务器代理
+            * 目标服务器有接口：代理
+            * 目标服务器没有接口：爬
+                * 会分析html结构
+                * 会使用工具
+
+* 页面渲染方式
+    * 客户端渲染（BSR）：前后端分离
+        * 后端：编写数据接口
+        * 前端：发起ajax请求，拿到数据后，遍历生成html结构
+        * 优点
+            * 与用户的交互感更强
+            * 用户体验更好
+            * 开发更灵活
+        * 请求过程
+            1. 输入地址，返回index.html
+            2. 解析html，返现script
+            3. 请求服务器，返回js代码
+            4. 发起ajax请求，返回数据
+            5. 解析数据，生成html结构
+
+    * 服务端渲染（SSR）：前后端不分离
+        * 后端：生成html结构并响应到前端
+        * 优点
+            * SEO
+            * 速度更快
+        * 请求过程
+            1. 输入地址，返回index.html
+            2. 由于所有的html结构已经在服务器生成完毕，浏览器解析html结构

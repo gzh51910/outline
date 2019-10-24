@@ -12,7 +12,10 @@
   "author": "laoxie",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
-    "mysql": "^2.17.1"
+    "http-proxy-middleware": "^0.20.0",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0"
   }
 }
