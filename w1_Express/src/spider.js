@@ -20,6 +20,7 @@ request(
             let filename = path.basename(imgurl);//447d2b5c52c54142aa33f74b6c382064.jpg
 
             // 利用request与stream数据流保存爬取到的图片到本地硬盘
+            // require()：返回一个stream
             request(imgurl).pipe(fs.createWriteStream('img/'+filename));
 
             let goods = {

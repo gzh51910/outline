@@ -302,3 +302,41 @@
         * 请求过程
             1. 输入地址，返回index.html
             2. 由于所有的html结构已经在服务器生成完毕，浏览器解析html结构
+
+## day1-5
+
+### 复习
+* 跨域解决方案
+    * jsonp
+        * script标签
+        * 全局函数
+        * 响应js代码
+    * CORS
+        * 响应头
+        * 简单跨域
+        * 复杂跨域
+    * 服务器代理
+        * 服务器有接口：http-proxy-middleware
+        * 服务器没接口: request & cheerio
+* BSR与SSR
+* 爬虫
+
+### 知识点
+* fs
+    * fs.readFile()/fs.readFileSync()
+    * fs.writeFile()/fs.writeFileSync()
+    * fs.appendFile()/fs.appendFileSync()
+* 大文件的读取与写入：分多次完成文件的读写操作
+    * stream文件流：文件的液体状态
+    * 读取流（以流的方式读取文件内容）
+        * fs.createReadStream(filepath)
+    * 写入流
+    * 管道流
+```js
+    gulp.task('compileSass',()=>{
+        gulp.src('./src/sass/home.scss')   //返回一个读取流
+        .pipe(sass())
+        .pipe(rename())
+        .pipe(gulp.dist('./dist'))          // gulp.dist()返回一个写入流
+    })
+```
