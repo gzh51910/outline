@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多人聊天室</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		.msg-list{position:relative;width:600px;margin:0 auto;}
+		.msg-list .content{padding:10px;border:1px solid #ddd;}
+		.msg-list ul{min-height:200px;max-height:400px;overflow-y:auto;}
+		.msg-list li{float:left;clear:both;margin:10px 0;padding:5px;line-height:2;border-radius:5px;background-color:#efefef;}
+		.msg-list li h4{margin:0;}
+		.msg-list li.active{float:right;background-color:#58bc58;color:#fff;}
+		.msg-list textarea{display:block;min-height:50px;margin:10px 0;width:100%;box-sizing: border-box;}
+		.status{display:none;padding:5px 10px;text-align:center;color:#999;}
+		.login{text-align:right;}
+	</style>
+</head>
+<body>
+	<h1>h5-1910多人聊天室</h1>
+	<div id="autoAnswer" class="msg-list">
+		<div class="login">
+			<input type="text" name="username">
+			<button class="btn-login">进入</button>
+			<button class="btn-logout">退出</a>
+		</div>
+		<div class="content">
+			<div class="status"></div>
+			<ul>
+			</ul>
+		</div>
+		<textarea></textarea>
+		<button class="btn-send">发送</button>
+	</div>
+	<script>
+		(function(){
+			/**
+			 * 客户端Socket
+				 * 创建WebSocket对象：new WebSocket(url)
+				 
+
+
+				前后端协商socket状态:
+				status:
+					0:退出登录
+					1:登录成功
+					2:发送消息
+				data:{username,content,time}
+			 */
+			let autoAnswer = document.querySelector('#autoAnswer');
+			let login = autoAnswer.querySelector('.login');
+			let username = login.children[0];
+
+			let msglist = autoAnswer.querySelector('ul');
+			let msg = autoAnswer.querySelector('textarea');
+			let btnSend = autoAnswer.querySelector('.btn-send');
+			let status = autoAnswer.querySelector('.status');
+
+			let wsurl = 'ws://localhost:1910';
+			let websocket,datalist = [];
+
+			// 登录
+			login.onclick = (e)=>{
+				// 进入聊天室
+				if(e.target.className === 'btn-login'){
+					let _username = username.value;
+					if(_username.trim()===''){
+						alert('用户名不能为空');
+						username.focus();
+						return;
+					}
+					
+
+					websocket = new WebSocket(wsurl);
+
+					websocket.onopen = ()=>{
+						username.disabled = true;
+
+						tips('欢迎进入1910多人聊天室')
+
+						// 连接成功后，发送消息给服务器，让服务器转发我进入聊天室的信息
+						let data = {
+							status:1,
+							data:{username:_username}
+						}
+
+						// 发送给服务器的消息格式只能是string
+						websocket.send(JSON.stringify(data))
+					}
+
+					websocket.onclose = ()=>{
+						username.disabled = false;
+						username.value = '';
+						
+					}
+
+					// 收到服务器发送的消息，触发message事件
+					websocket.onmessage = (e)=>{
+						let data = JSON.parse(e.data);
+
+						// 根据不同的消息类型，进行不同的操作
+						switch(data.status){
+							case 1:
+								tips(`${data.data.username}进入聊天室`);
+								break;
+							case 0:
+								tips(`${data.data.username}退出聊天室`);
+								break;
+							case 2:
+								datalist.push(data.data);
+								render();
+								break;
+						}
+					}
+
+				}	
+				// 退出聊天室
+				else if(e.target.className === 'btn-logout'){
+					let data = {
+						status:0,
+						data:{username:username.value}
+					}
+					websocket.send(JSON.stringify(data))
+					websocket.close();
+					websocket = null;
+				}
+			}
+
+
+			// 发送消息
+			btnSend.onclick = ()=>{
+				if(!websocket){
+					alert('请先登录');
+					username.focus();
+					return;
+				}
+				// 获取输入的消息
+				let _msg = msg.value;
+				let _username = username.value;
+				let data = {
+					status:2,
+					data:{
+						username:_username,
+						content:_msg,
+						time:Date.now()
+					}
+				}
+
+				websocket.send(JSON.stringify(data))
+
+				// 清空并获得焦点
+				msg.value = '';
+				msg.focus();
+			}
+			function tips(msg){
+				status.style.display = 'block';
+				status.innerHTML = msg;
+				setTimeout(()=>{
+					status.style.display = 'none';
+				},10000);
+			}
+
+			function render(){
+				msglist.innerHTML = datalist.map(item=>{
+					return `<li ${item.username===username.value ? 'class="active"':''}>
+						<h4>${item.username}</h4>
+						<div>${item.content}</div>
+						<time>${item.time}</time>
+					</li>`
+				}).join('');
+
+				// 把最后一个li滚动到可视区域
+				msglist.lastElementChild.scrollIntoView()
+			}
+			
+		})();
+	</script>
+</body>
+</html>

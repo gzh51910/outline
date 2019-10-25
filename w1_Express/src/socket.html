@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>WebSocket</title>
+</head>
+<body>
+    <h1>WebSocket</h1>
+    <textarea id="msg"></textarea>
+    <button id="btnSend">发送消息</button>
+    <script>
+        /**
+            * WebSocket客户端
+         */
+        let msg = document.querySelector('#msg');
+        let btnSend = document.querySelector('#btnSend');
+
+        //  1. 创建客户端对象，并连接服务器
+        var socket = new WebSocket('ws://localhost:1001');
+
+        //监听 socket 的连接
+        // 当客户端与服务端连接成功后会触发open事件
+        socket.onopen = function(){
+            console.log("服务已连接 ws://localhost:1001");
+        }
+
+        // 客户端接收到服务武器推送的消息，会触发message事件
+        // 小内容保存在event.data
+        socket.onmessage = (event)=>{
+            console.log(event.data);
+        }
+
+        // 发送消息给服务器
+        btnSend.onclick = ()=>{
+            let _msg = msg.value;
+            socket.send(_msg);
+        }
+
+    </script>
+</body>
+</html>

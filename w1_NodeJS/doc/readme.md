@@ -340,3 +340,6 @@
         .pipe(gulp.dist('./dist'))          // gulp.dist()返回一个写入流
     })
 ```
+
+* http/https    短连接（请求服务器并返回后，与服务器就断开连接）
+* webSocket     长连接（与服务器连接后不会断开）
