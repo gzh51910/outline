@@ -343,3 +343,55 @@
 
 * http/https    短连接（请求服务器并返回后，与服务器就断开连接）
 * webSocket     长连接（与服务器连接后不会断开）
+
+
+## day2-1
+
+### 面试题
+* async & await
+* 前后端的理解
+    * 前端 FE
+    * 后端 BE
+    * 沟通
+* RESTful规范的理解
+    * 请求类型
+    * 请求路径
+* 怎么理解Express中间件
+    * 内置
+    * 自定义
+    * 第三方
+
+### 复习
+
+* 服务器代理
+    * 有接口：正向代理
+    * 没有接口：爬虫
+* BSR与SSR
+    * SSR渲染模板引擎：ejs,jade
+        * 在服务器生成html结构
+    * BSR：在客户端生成html结构
+* WebSocket
+    * 客户端
+        * html5新特性WebSocket
+    * 服务端
+        * 第三方模块ws
+    * 面试题（应用场景）
+        * 长连接
+        * 服务器主动
+        * 无跨域限制
+        * 在不支持webSocket的浏览器上如何实现
+            * 轮询：定时器（嵌套setTimeout）
+            ```js
+                setTimeout(function show(){
+                    console.log(666)
+                    setTimeout(show,5000)
+                },5000)
+            ```
+
+### 项目上线
+    * 购买服务器
+        * 阿里云
+        * 腾讯云
+        * 百度云
+        * 亚马逊云
+        ....
