@@ -30,7 +30,7 @@ Router.use((req,res,next)=>{
 })
 
 // 格式化请求体中的参数
-Router.use(express.json(),express.urlencoded());
+Router.use(express.json(),express.urlencoded({extended:false}));
 
 Router.use('/login',loginRouter)
 Router.use('/goods',goodsRouter)

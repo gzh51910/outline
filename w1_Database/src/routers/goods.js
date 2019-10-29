@@ -4,48 +4,34 @@ const Router = express.Router();
 
 // 引入数据库操作方式
 const query = require('../db/myql');
+const mongodb = require('../db/mongodb')
+const {formatData} = require('../utils')
 
 // 编写数据接口
 
+const colName = 'goods';
+
 // @查询所有商品
 Router.get('/',async (req,res)=>{
+    // page     index
+    // 1        0
+    // 2        10
+    // 3        20
+    // 推导公式：index = (page-1)*size;
+    // 语句：find().skip(index).litmit(size)
+    let {page=1,size=10,sort} = req.query;
+
+    // 根据分页和每页数量计算跳过的索引值
+    let index = (page-1)*size
     
-    // 查询数据库：
-    let sql = `select * from goods`;
-    // connection.connect();
-    // connection.query(sql,  (error, result, fields)=> {
-    //     // error；错误信息，默认null
-    //     // result：查询结果
-    //     // fields：数据库字段说明
-    //     if (error) throw error;
-    //     // console.log('The solution is: ', results,fields);
-    //     res.send(result);
+    // mySQL查询数据库：
+    // let sql = `select * from goods`;
+    // let data = await query(sql);
+    // res.send(data);
 
-    //     // 关闭连接，释放资源
-    //     connection.end();
-    // });
-
-    // pool.query(sql,(err,result)=>{
-    //     res.send(result);
-    // })
-
-    // 回调方式
-    // query(sql,function(data){
-    //     res.send(data)
-    // });
-
-    // ES6的Promise方式
-    // query(sql).then(data=>{
-    //     res.send(data)
-    // }).catch(err=>{
-
-    // })
-
-    // ES7的async & await
-    // 用来简化promise的操作
-    // * await 等待promise对象的状态为Resolved后的返回值
-    let data = await query(sql);
-    res.send(data);
+    // mongodb查询数据库
+    let data = await mongodb.find(colName,{},{skip:index,limit:size,sort});
+    res.send(formatData({data}))
 })
 
 Router.get('/jsonp',async (req,res)=>{
