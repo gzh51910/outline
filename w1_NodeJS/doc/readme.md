@@ -395,3 +395,22 @@
         * 百度云
         * 亚马逊云
         ....
+
+### 知识点
+* 数据库
+    * MySQL             关系型数据库，类似与表格
+    * MongoDB           非关系型数据库，类似于json
+
+                
+                 数据库         表              数据记录
+    MySQL        database       table           row
+    MongoDB      database       collection      document
+
+
+## day2-2
+
+* 在NodeJS中使用MongoDB
+    * 驱动(第三方模块)
+        * mongodb
+        * mongoose
+* 统一返回前端的数据格式
