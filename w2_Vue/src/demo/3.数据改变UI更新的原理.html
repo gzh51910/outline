@@ -30,35 +30,9 @@
         let vm = new Vue({
             el:'#app',
             data:data,
-        })
+        });
 
-
-        // 不使用Vue如何更新UI
-        // let app = document.querySelector('#app');
-        // app.innerText = data.username;
-        let user = {
-            // username:'dingding'
-            get age(){
-                return 18
-            },
-            set age(val){
-                console.log('setter',val)
-            }
-        }
-        // user.username = 'laoxie'
-        // 监听username属性的修改，并执行app.innerText = user.username
-        // 要监听username属性的修改，必须把属性特性改成setter
-        // Object.defineProperty(user,'username',{
-        //     get(){
-        //         console.log('getter');
-        //         return data.username
-        //     },
-        //     set(val){
-        //         console.log('setter',val)
-        //         data.username = val;
-        //         app.innerText = val;
-        //     }
-        // })
+        console.log(vm)
     </script>
 </body>
 </html>

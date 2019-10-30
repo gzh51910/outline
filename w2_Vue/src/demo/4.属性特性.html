@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>4.属性特性</title>
+</head>
+<body>
+    <h1>4.属性特性</h1>
+    <div>密码：<span id="password"></span></div>
+    <script>
+        /**
+         * 属性特性（一种更深入控制属性的方式）
+            * 设置属性特性：Object.defineProperty(obj,key,descriptor)
+            * 获取属性特性：Object.getOwnPropertyDescriptor(obj,key)
+                * 值属性（有自己的值的属性）
+                    * configurable  可配置性（属性特性总开关）
+                    * enumerable    可枚举性（是否可遍历）
+                    * writable      可写性
+                    * value
+                * 存储器属性（本身没有值，一般用于代理其他数据）
+                    * configurable  可配置性（属性特性总开关）
+                    * enumerable    可枚举性（是否可遍历）
+                    * get           监听读取操作
+                    * set           监听写入操作
+                    * 
+            PS：传统方式设置的属性，所有的属性特性默认为true；
+                而通过Object.defineProperty()设置的属性特性默认为false
+         */
+        let user = {
+            username:'laoxie',
+            age:18
+        }
+
+        // 属性可以随意修改
+        // user.username = 'xiaoxie'
+
+        // 如何设置一个不可修改的属性:age
+        Object.defineProperty(user,'age',{
+            // configurable:false,
+            // enumerable:false,
+            writable:false,
+            // value:18
+        })
+
+        let psw = 1234;
+        Object.defineProperty(user,'password',{
+            configurable:true,
+            // enumerable:false
+            get(){console.log('getter')
+                return psw
+            },
+            set(val){
+                console.log('setter')
+                psw = val
+                document.getElementById('password').innerText = user.password;
+            }
+        })
+
+        document.getElementById('password').innerText = user.password;
+    </script>
+</body>
+</html>

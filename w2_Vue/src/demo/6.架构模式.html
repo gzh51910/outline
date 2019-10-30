@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>6.架构模式（分层）</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>6.架构模式（分层）</h1>
+    <!-- View -->
+    <div id="app">
+        {{score}}
+        <input type="text" v-model="score.english" >
+    </div>
+    
+    <script>
+       /**
+        *  架构模式（分层）
+            * MVC
+                * Model（模型）：数据处理
+                * View（视图）：数据展示
+                * Controller（控制器）：业务逻辑处理（M和V之间的连接器）
+            * MVP
+            * MVVM
+        */
+
+        // Model
+        let data = {
+            score:{
+                chinese:100,
+                english:20,
+                math:149
+            }
+        }
+
+
+        // ViewModel
+        let vm = new Vue({
+            el:'#app',
+            data
+        })
+
+        // Model ->(vm)-> View
+        // data.score.english = 60
+
+        // View -> (vm) -> Model
+        // <input v-model="score.english"/>
+        
+    </script>
+</body>
+</html>

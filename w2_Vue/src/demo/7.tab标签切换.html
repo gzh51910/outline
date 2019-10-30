@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>7.tab标签切换</title>
+    <script src="js/vue.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"/>
+    <!-- <style>
+        .active{color:#f00;font-weight:bold;}
+    </style> -->
+</head>
+<body>
+    <h1>7.tab标签切换</h1>
+    <!-- View -->
+    <div id="app" clas="container-fluid">
+        <!-- 视图中可以使用的数据为vm实例中的属性 -->
+        <ul class="nav nav-tabs">
+            <li 
+            v-for="(item,idx) in namelist" 
+            v-bind:class="{active:idx===activeIndex}" 
+            v-on:click="changeIndex(idx)">
+            <a href="#">{{item.username}}</a>
+        </li>
+        </ul>
+        <div style="padding:15px" v-for="(item,idx) in namelist" v-show="idx===activeIndex">
+            {{item.username}}最爱{{item.hobby}}
+        </div>
+    </div>
+    
+    <script>
+       /**
+        *  7.tab标签切换
+            * 指令（html属性）
+                * v-for
+                * v-show
+                * v-on
+                * v-bind
+        */
+       let data = {
+           activeIndex:0,
+           namelist:[{
+               username:'laoxie',
+               hobby:'敲代码'
+           },{
+               username:'dingding',
+               hobby:'琴棋书画'
+           },{
+               username:'luoluo',
+               hobby:'化妆'
+           }]
+       }
+    
+        let vm = new Vue({
+            el:'#app',  // 连接View层
+            data,// 连接Model层
+            methods:{
+                changeIndex(idx){
+                    this.activeIndex = idx
+                }
+            }
+        })
+        
+        
+    </script>
+</body>
+</html>

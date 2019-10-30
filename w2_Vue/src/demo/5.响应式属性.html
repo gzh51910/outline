@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>5.响应式属性</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>5.响应式属性</h1>
+    <div id="app">
+        {{score}}
+        <div>{{namelist}}</div>
+    </div>
+    
+    <script>
+       /**
+        *  如何设置响应式属性
+            * 初始化时写入data属性
+            * Vue.set(target,key,val) / vm.$set()
+                > 注意：target对象不能是 Vue 实例，或者 Vue 实例的根数据对象
+            * 数组变异方法
+                * push()/unshift()
+                * pop()/shift()
+                * splice()
+                * sort()/reverse()
+        */
+
+        let data = {
+            score:{
+                chinese:100,
+                english:20,
+                math:149
+            },
+            namelist:['laoxie','dingding','luoluo']
+        }
+
+        let vm = new Vue({
+            el:'#app',
+            data
+        })
+
+        // Vue.set(vm.score,'wuli',123)
+        // Vue.set(vm,'wuli',123);//错误
+        
+    </script>
+</body>
+</html>
