@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>1.Vue实例化</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>1.Vue实例化</h1>
+    <div id="app">
+        <p>用户名：{{username}}</p>
+        <p>年龄：<span>{{age}}</span></p>
+    </div>
+    <script>
+        /*
+            实例化
+                * 配置选项
+                    * el ： 关联Vue实例与页面元素
+        */
+       let data = {
+           username:'laoxie',
+           age:18
+       }
+
+        new Vue({
+            el:'#app',
+            data:data
+        });
+
+        data.age = 19
+
+
+        // 以前的做法
+        // let app = document.querySelector('#app');//节点操作
+        // app.innerHTML = data.username;//节点操作
+        // 改变年龄
+        // app.children[1].children[0].innerText = 19
+    </script>
+</body>
+</html>

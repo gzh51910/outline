@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3.数据改变UI更新的原理</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>3.数据改变UI更新的原理</h1>
+    <div id="app">
+        {{username}}
+    </div>
+    
+    <script>
+        /*
+            3.数据改变UI更新的原理
+                * 属性特性
+                    * 存储器属性
+                        * getter
+                        * setter
+        */
+
+        let data = {
+            username:'dingding'
+        }
+        
+
+        let vm = new Vue({
+            el:'#app',
+            data:data,
+        })
+
+
+        // 不使用Vue如何更新UI
+        // let app = document.querySelector('#app');
+        // app.innerText = data.username;
+        let user = {
+            // username:'dingding'
+            get age(){
+                return 18
+            },
+            set age(val){
+                console.log('setter',val)
+            }
+        }
+        // user.username = 'laoxie'
+        // 监听username属性的修改，并执行app.innerText = user.username
+        // 要监听username属性的修改，必须把属性特性改成setter
+        // Object.defineProperty(user,'username',{
+        //     get(){
+        //         console.log('getter');
+        //         return data.username
+        //     },
+        //     set(val){
+        //         console.log('setter',val)
+        //         data.username = val;
+        //         app.innerText = val;
+        //     }
+        // })
+    </script>
+</body>
+</html>
