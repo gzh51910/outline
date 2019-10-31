@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件通讯-内容</title>
+    <script src="js/vue.js"></script>
+    
+</head>
+<body>
+    <div id="app">
+       <p v-for="(item,idx) in users" v-bind:key="item">
+           <input type="checkbox"/> {{item}}
+       </p>
+       <input type="text" v-model="name">
+       <button @click="add">添加</button>
+    </div>
+   
+    <script>
+        /**
+            
+        */
+       
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                name:'',
+                users:['laoxie','dingding','yueyue']
+            },
+            methods:{
+                add(){
+                    // this.users.unshift(this.name);
+                    this.users.splice(2,0,this.name)
+                    this.name = ''
+                }
+            },
+            mounted(){
+                let ps = document.querySelectorAll('p');
+                ps.forEach(item=>{
+                    item.setAttribute('data-id',item.innerText.trim())
+                })
+            }
+        })
+        
+    </script>
+</body>
+</html>

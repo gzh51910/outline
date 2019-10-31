@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8.v-for</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>8.v-for</h1>
+    <!-- View -->
+    <div id="app">
+        {{score}}
+        <ul>
+            <li v-for="(item,key,idx) in score">{{idx}} - {{key}} - {{item}}</li>
+        </ul>
+    </div>
+    
+    <script>
+        // [140,130,150]
+        /**
+         * key的作用
+            * 虚拟DOM：
+            * 真实DOM：
+         */
+       let vm = new Vue({
+           el:'#app',
+           data:{
+               score:{
+                   english:140,
+                   chinese:130,
+                   math:150
+               }
+           }
+       })
+        
+        
+    </script>
+</body>
+</html>

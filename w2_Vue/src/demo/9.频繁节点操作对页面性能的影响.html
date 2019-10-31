@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>9.频繁节点操作对页面性能的影响</title>
+</head>
+<body>
+    <h1>9.频繁节点操作对页面性能的影响</h1>
+    <button>0</button>
+    <script>
+        /**
+         * 判断一段js代码所花的事件
+            * console.time(name)
+            * console.timeEnd(name)
+         */
+        // let start = Date.now()
+        console.time('for')
+        // 频繁节点操作(3w次)
+        // for(let i=0;i<10000;i++){
+        //     let btn = document.getElementsByTagName('button')[0];
+        //     let num = btn.innerText;
+        //     num++;
+        //     btn.innerText = num
+        // }
+
+        // 优化(3次)
+        let btn = document.getElementsByTagName('button')[0];
+        let num = btn.innerText;
+        for(let i=0;i<10000;i++){
+            num++;
+        }
+        btn.innerText = num
+        console.timeEnd('for')
+        // let end = Date.now()
+        // let time = (end-start)/1000
+        // console.log(time)
+    </script>
+</body>
+</html>

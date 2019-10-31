@@ -97,3 +97,141 @@
 * 指令
     * v-on
     * v-model
+
+## day2-4
+
+### 复习
+* Vue使用步骤
+    1. script引入
+        * 开发版    develpoment
+        * 生产版本  production
+        * cdn
+    2. 实例化
+        ```js
+            let vm = new Vue(options)
+        ```
+    3. 配置参数
+        * el    关联视图层
+        * data  关联数据层
+            > Vue在实例化时，会遍历data下所有属性，把它们变成响应式属性
+        * methods   用于自定义方法和事件处理函数
+    
+    ```js
+        <div id="app">{{username}}</div>
+    ```
+
+* 架构模式
+    * MVC
+    * MVP
+    * MVVM
+* 响应式属性
+    > 数据的修改->UI更新
+    * 原理：getter&setter（可以监听到某个属性是否被修改）
+    * 如何添加响应式属性
+        * 实例化时添加属性到data
+        * Vue.set(target,key,val)/vm.$set()
+        * 数组变异方法
+
+* 属性特性（更深入控制属性的方式）
+    * 值属性
+        * configurable
+        * enumerable
+        * writable
+        * value
+    * 存储器属性
+        * configurable
+        * enumerable
+        * get
+        * set
+    * 修改：Object.defineProperty()
+    * 获取：Object.getOwnPropertyDescriptor()
+
+* 实例属性(vm下的属性/方法)
+    > 可以写在视图层上的数据是vm实例的属性/方法
+    * 属性
+        * $refs 获取真实DOM节点
+    * 方法
+        * $set()
+
+* 指令（html的属性:v-*）
+    * v-for
+        * 可以遍历数组/对象
+        * 格式：
+            * v-for="item in namelist"
+            * v-for="item of namelist"
+    * v-bind        (简写 :)
+        >可以用在任何属性上，对style和class属性进行增强
+    * v-on  （简写：@）
+    * v-model
+        * 双向数据绑定
+            * Model -> View ：单向绑定（getter&setter）
+            * View -> Model : 事件
+
+
+### 知识点
+
+* 影响页面性能几大因素
+    * 节点的频繁操作
+    * 事件绑定数量
+    * ....
+
+* Virtual DOM
+    > 一个结构类似与真实DOM节点的js对象
+    * 优化方式
+        * 优化节点操作
+        * 优化事件处理
+        * ....
+    * 虚拟DOM是怎么优化性能的：背后有一套强大的算法：diff算法
+    * key：唯一且稳定
+    ```js
+        btn.innerText = 'laoxie'
+        btn.innerText = 'dingding'
+        btn.innerText = 'luoluo'
+        btn.innerText = 'laoxie'
+
+        // 虚拟DOM大概样子
+        // 初始状态
+        {
+            type:'div',
+            attrs:{},
+            children:[{
+                type:'h1',
+                children:'1910'
+            },{
+                type:'ul',
+                children:[{
+                    type:'li',
+                    children:'1111'
+                }.{
+                    type:'li',
+                    children:'xxx'
+                },{
+                    type:'li',
+                    children:'xxx'
+                }]
+            }]
+        }
+
+        // 结束状态
+        {
+            type:'div',
+            attrs:{},
+            children:[{
+                type:'h1',
+                children:'1910'
+            },{
+                type:'ul',
+                children:[{
+                    type:'li',
+                    children:'2222'
+                }.{
+                    type:'li',
+                    children:'xxx'
+                },{
+                    type:'li',
+                    children:'xxx'
+                }]
+            }]
+        }
+
+    ```
