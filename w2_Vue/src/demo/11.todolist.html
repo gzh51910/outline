@@ -13,7 +13,11 @@
         <h1>TodoList</h1>
         <div id="app">
             <div class="input-group">
-                <input type="text" class="form-control" v-model="title" ref="title">
+                <input type="text" class="form-control" v-model="title" ref="title" @keyup.13="addItem">
+                <!-- <input type="text" class="form-control" ref="title"
+                v-bind:value="title"
+                v-on:input=""
+                > -->
                 <div class="input-group-btn">
                     <button type="button" class="btn btn-success" v-on:click="addItem">添加</button>
                 </div><!-- /btn-group -->
@@ -21,7 +25,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th><input type="checkbox"/>全选</th>
+                        <th><input type="checkbox" v-model="selectAll"/>全选</th>
                         <th>#</th>
                         <th>待办事项</th>
                         <th>是否完成</th>
@@ -29,15 +33,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(item,idx) in datalist" v-bind:key="item.id">
-                        <td><input type="checkbox"></td>
+                    <tr 
+                    v-for="(item,idx) in datalist" 
+                    v-bind:key="item.id" 
+                    @click="select(idx)"
+                    :class="{success:item.selected}"
+                    >
+                        <td><input type="checkbox" v-model="item.selected"></td>
                         <td>{{idx+1}}</td>
-                        <td>{{item.title}}</td>
+                        <!-- <td v-text="idx+1"></td> -->
+                        <!-- <td>{{item.title}}</td> -->
+                        <td v-html="item.title"></td>
                         <td>{{item.done?'是':'否'}}</td>
                         <td>
                             <div class="btn-group btn-group-sm">
+                                <!-- <button class="btn btn-default" @click="completeItem($event,item.id)">完成</button> -->
                                 <button class="btn btn-default" @click="completeItem(item.id)">完成</button>
-                                <button class="btn btn-danger" @click="removeItem(idx)">删除</button>
+                                <button class="btn btn-danger" @click.stop="removeItem(idx)">删除</button>
                             </div>
                         </td>
                     </tr>
@@ -49,23 +61,40 @@
         let vm = new Vue({
             el:'#app',
             data:{
-                title:'laoxie',
+                title:'',
                 datalist:[{
                     id:Date.now(),
-                    title:"年前实现月薪过万",
-                    done:false
+                    title:"年前实现<strong>月薪过万</strong>",
+                    done:false,
+                    selected:false
                 },{
                     id:Date.now()+10,
                     title:"明年变成高富帅，迎娶白富美",
-                    done:false
-                }]
+                    done:false,
+                    selected:false
+                }],
+                
+            },
+            computed:{
+                // 这里的属性为存储器属性
+                selectAll:{
+                    get(){
+                        return this.datalist.every(item=>item.selected)
+                    },
+                    set(val){
+                        this.datalist.forEach(item=>{
+                            item.selected = val
+                        })
+                    }
+                }
             },
             methods:{
                 addItem(){
                     let data = {
                         id:Date.now(),
                         title:this.title,
-                        done:false
+                        done:false,
+                        selected:false
                     }
                     this.datalist.unshift(data)
 
@@ -73,10 +102,11 @@
                     this.title = '';
                     this.$refs.title.focus();
                 },
-                removeItem(idx){
+                removeItem(idx,event){
                     this.datalist.splice(idx,1)
+                    // event.stopPropagation()
                 },
-                completeItem(id){
+                completeItem(id){console.log('complete')
                     // this.datalist.forEach((item,idx)=>{
                     //     if(idx === index){
                     //         item.done = true
@@ -87,6 +117,11 @@
                             item.done = true
                         }
                     });
+
+                    // event.stopPropagation()
+                },
+                select(idx){
+                    this.datalist[idx].selected = !this.datalist[idx].selected
                 }
             }
         })

@@ -146,10 +146,24 @@
     * 修改：Object.defineProperty()
     * 获取：Object.getOwnPropertyDescriptor()
 
+
+
+
+### 知识点
+* 配置参数
+    * el    关联视图层
+    * data  关联数据层
+        > Vue在实例化时，会遍历data下所有属性，把它们变成响应式属性
+    * methods   用于自定义方法和事件处理函数
+    * computed
 * 实例属性(vm下的属性/方法)
     > 可以写在视图层上的数据是vm实例的属性/方法
     * 属性
+        * data下的属性会自动称为vm下的属性
         * $refs 获取真实DOM节点
+        * $el
+        * $data
+        * $options  实例化时的配置参数
     * 方法
         * $set()
 
@@ -162,14 +176,18 @@
     * v-bind        (简写 :)
         >可以用在任何属性上，对style和class属性进行增强
     * v-on  （简写：@）
+        * event对象的获取：在事件触发时自动写入vm.$event
+            * 不传参，默认第一个参数为event对象
+            * 传参：必须手动传递$event
+        * 修饰符
     * v-model
         * 双向数据绑定
             * Model -> View ：单向绑定（getter&setter）
             * View -> Model : 事件
-
-
-### 知识点
-
+    * v-show（频繁显示隐藏）
+        > 通过display属性控制元素的显示隐藏
+    * v-if/v-else-if/v-else（不频繁的显示隐藏）
+        > 通过创建/移除的方式控制元素的显示隐藏
 * 影响页面性能几大因素
     * 节点的频繁操作
     * 事件绑定数量
@@ -235,3 +253,15 @@
         }
 
     ```
+
+* 数据绑定
+    * 单向数据绑定(Model->View)
+        * {{}}
+        * v-bind:attr
+        * v-text
+        * v-html
+    * 双向数据绑定
+        * Model -> View ： 单向绑定
+        * View -> Model ： 事件
+        * v-model
+            * 原理：v-bind:value + v-on:input

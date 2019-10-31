@@ -16,6 +16,9 @@
     <h1>7.tab标签切换</h1>
     <!-- View -->
     <div id="app" clas="container-fluid">
+        <button v-if="activeIndex>1">laoxie</button>
+        <button v-else-if="activeIndex>0">yueyue</button>
+        <button v-else>dingding</button>
         <!-- 视图中可以使用的数据为vm实例中的属性 -->
         <ul class="nav nav-tabs">
             <li 
@@ -25,7 +28,11 @@
             <a href="#">{{item.username}}</a>
         </li>
         </ul>
-        <div style="padding:15px" v-for="(item,idx) in namelist" v-show="idx===activeIndex">
+        <div 
+        style="padding:15px" 
+        v-for="(item,idx) in namelist" 
+        v-if="idx===activeIndex"
+        >
             {{item.username}}最爱{{item.hobby}}
         </div>
     </div>
