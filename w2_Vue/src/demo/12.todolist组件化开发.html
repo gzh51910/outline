@@ -16,6 +16,7 @@
             <todo-content :datalist="datalist" 
             :complete-item="completeItem"
             :remove-item="removeItem"
+            :select="select"
             ></todo-content>
         </div>
         <!-- <script id="todoForm" type="text/template">
@@ -47,7 +48,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <todo-item></todo-item> -->
+                    <!-- <todo-item @click.native="select(idx)"></todo-item> -->
                     <tr 
                     is="todo-item" 
                     v-for="item,idx in datalist" 
@@ -55,6 +56,7 @@
                     :idx="idx"
                     :remove-item="removeItem"
                     :complete-item="completeItem"
+                    @click.native="select(idx)"
                     ></tr>
                 </tbody>
             </table>
@@ -63,7 +65,6 @@
         <template id="todoItem">
             <tr 
             v-bind:key="item.id" 
-            @click="select(idx)"
             :class="{success:item.selected}"
             >
                 <td><input type="checkbox" v-model="item.selected"></td>
@@ -72,7 +73,7 @@
                 <td>{{item.done?'是':'否'}}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        <button class="btn btn-default" @click="completeItem(item.id)">完成</button>
+                        <button class="btn btn-default" @click.stop="completeItem(item.id)">完成</button>
                         <button class="btn btn-danger" @click.stop="removeItem(idx)">删除</button>
                     </div>
                 </td>
@@ -89,6 +90,9 @@
             * 只能是小写
          */
 
+        //  创建一个Vue实例，用来进行多层级组件通讯
+        let Bus = new Vue();
+
         Vue.component('todoForm',{
             data:function(){
                 return {
@@ -98,7 +102,6 @@
             template:`#todoForm`,
             methods:{
                 addItem(){
-
                     this.$emit('addit',this.title)
 
                     // 清空并获得焦点
@@ -109,24 +112,52 @@
         })
 
         Vue.component('todoContent',{
-            props:['datalist','completeItem','removeItem'],
+            name:'todoContent',
+            props:['datalist','completeItem','removeItem','select'],
+            computed:{
+                // 这里的属性为存储器属性
+                selectAll:{
+                    get(){
+                        return this.datalist.every(item=>item.selected)
+                    },
+                    set(val){
+                        this.datalist.forEach(item=>{
+                            item.selected = val
+                        })
+
+    
+                    }
+                }
+            },
             template:`#todoContent`,
             components:{
                 todoItem:{
-                    props:['item','idx','completeItem','removeItem'],
-                    template:`#todoItem`
+                    props:['item','idx'],
+                    template:`#todoItem`,
+                    methods:{
+                        completeItem(id){console.log(this)
+                            Bus.$emit('complete',id)
+                            // vm.$emit('complete',id)
+                            // this.$root.$emit('complete',id)
+                        },
+                        removeItem(idx){
+                            Bus.$emit('remove',idx)
+                            // vm.$emit('remove',idx)
+
+                            // this.$root.$emit('remove',idx)
+                        }
+                    }
                 }
             }
         });
 
 
-
+        
 
 
        let vm = new Vue({
            el:'#app',
            data:{
-                
                 datalist:[{
                     id:Date.now(),
                     title:"年前实现<strong>月薪过万</strong>",
@@ -139,19 +170,6 @@
                     selected:false
                 }],
                 
-            },
-            computed:{
-                // 这里的属性为存储器属性
-                selectAll:{
-                    get(){
-                        return this.datalist.every(item=>item.selected)
-                    },
-                    set(val){
-                        this.datalist.forEach(item=>{
-                            item.selected = val
-                        })
-                    }
-                }
             },
             methods:{
                 addItem(title){
@@ -186,8 +204,23 @@
                 select(idx){
                     this.datalist[idx].selected = !this.datalist[idx].selected
                 }
+            },
+
+            // 生命周期函数
+            // 实例化时被自动自行的函数
+            created(){
+                // 自定义complete事件
+                // 当complete事件被触发时，执行this.completeItem
+
+                Bus.$on('complete',this.completeItem)
+                Bus.$on('remove',this.removeItem)
+
+                // this.$on('complete',this.completeItem)
+                // this.$on('remove',this.removeItem)
             }
        })
+
+       
     </script>
 </body>
 </html>
