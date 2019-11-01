@@ -265,3 +265,32 @@
         * View -> Model ： 事件
         * v-model
             * 原理：v-bind:value + v-on:input
+
+
+## day2-5
+
+### 复习
+
+* VirtualDOM：Vue是一个高性能操作
+    > 结构类似于真实DOM节点的js对象
+    * diff算法
+    * key: 唯一且稳定
+* 双向数据绑定的原理
+    * Model->View
+    * View->Model
+
+### 知识点
+* 组件Component
+    * 定义
+        * 全局组件：Vue.component()
+        * 局部组件：components
+    * 使用
+        * 定义组件其实就是自定义一个标签（符合W3C标准）
+    * 组件通讯
+        * 父 -> 子：props
+            1. 给子组件定义属性，并传递数组
+            2. 在子组件中通过props配置参数接收数据
+            >接收到的数据会自动称为子组件的属性
+        * 子 -> 父：自定义事件
+            1. 在子组件上定义一个事件`v-on:additem`
+            2. 在子组件内部触发这个自定义事件：`$emit()`

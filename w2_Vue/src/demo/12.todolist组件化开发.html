@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"/>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>TodoList</h1>
+        <div id="app">
+            <todo-form v-on:addit="addItem"></todo-form>
+            <todo-content :datalist="datalist" 
+            :complete-item="completeItem"
+            :remove-item="removeItem"
+            ></todo-content>
+        </div>
+        <!-- <script id="todoForm" type="text/template">
+            <div class="input-group">
+                    <input type="text" class="form-control" v-model="title" ref="title" @keyup.13="addItem">
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-success" v-on:click="addItem">添加</button>
+                    </div>
+                </div>
+        </script> -->
+        <template id="todoForm">
+            <div class="input-group">
+                <input type="text" class="form-control" v-model="title" ref="title" @keyup.13="addItem">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-success" v-on:click="addItem">添加</button>
+                </div>
+            </div>
+        </template>
+        <template id="todoContent">
+            <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" v-model="selectAll"/>全选</th>
+                        <th>#</th>
+                        <th>待办事项</th>
+                        <th>是否完成</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <todo-item></todo-item> -->
+                    <tr 
+                    is="todo-item" 
+                    v-for="item,idx in datalist" 
+                    :item="item" 
+                    :idx="idx"
+                    :remove-item="removeItem"
+                    :complete-item="completeItem"
+                    ></tr>
+                </tbody>
+            </table>
+        </div>
+        </template>
+        <template id="todoItem">
+            <tr 
+            v-bind:key="item.id" 
+            @click="select(idx)"
+            :class="{success:item.selected}"
+            >
+                <td><input type="checkbox" v-model="item.selected"></td>
+                <td>{{idx+1}}</td>
+                <td v-html="item.title"></td>
+                <td>{{item.done?'是':'否'}}</td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                        <button class="btn btn-default" @click="completeItem(item.id)">完成</button>
+                        <button class="btn btn-danger" @click.stop="removeItem(idx)">删除</button>
+                    </div>
+                </td>
+            </tr>
+        </template>
+    </div>
+    <script>
+        /**
+         * 组件定义(相当于定义了一个html标签)
+            * 全局组件：Vue.component(name,options)
+            * 局部组件：components配置参数
+        
+         * 组件的使用
+            * 只能是小写
+         */
+
+        Vue.component('todoForm',{
+            data:function(){
+                return {
+                    title:'',
+                }
+            },
+            template:`#todoForm`,
+            methods:{
+                addItem(){
+
+                    this.$emit('addit',this.title)
+
+                    // 清空并获得焦点
+                    this.title = '';
+                    this.$refs.title.focus();
+                }
+            }
+        })
+
+        Vue.component('todoContent',{
+            props:['datalist','completeItem','removeItem'],
+            template:`#todoContent`,
+            components:{
+                todoItem:{
+                    props:['item','idx','completeItem','removeItem'],
+                    template:`#todoItem`
+                }
+            }
+        });
+
+
+
+
+
+       let vm = new Vue({
+           el:'#app',
+           data:{
+                
+                datalist:[{
+                    id:Date.now(),
+                    title:"年前实现<strong>月薪过万</strong>",
+                    done:false,
+                    selected:false
+                },{
+                    id:Date.now()+10,
+                    title:"明年变成高富帅，迎娶白富美",
+                    done:false,
+                    selected:false
+                }],
+                
+            },
+            computed:{
+                // 这里的属性为存储器属性
+                selectAll:{
+                    get(){
+                        return this.datalist.every(item=>item.selected)
+                    },
+                    set(val){
+                        this.datalist.forEach(item=>{
+                            item.selected = val
+                        })
+                    }
+                }
+            },
+            methods:{
+                addItem(title){
+                    let data = {
+                        id:Date.now(),
+                        title:title,
+                        done:false,
+                        selected:false
+                    }
+                    this.datalist.unshift(data)
+                    // console.log(666)
+                    
+                },
+                removeItem(idx,event){
+                    this.datalist.splice(idx,1)
+                    // event.stopPropagation()
+                },
+                completeItem(id){console.log('complete')
+                    // this.datalist.forEach((item,idx)=>{
+                    //     if(idx === index){
+                    //         item.done = true
+                    //     }
+                    // })
+                    this.datalist.forEach(item=>{
+                        if(item.id === id){
+                            item.done = true
+                        }
+                    });
+
+                    // event.stopPropagation()
+                },
+                select(idx){
+                    this.datalist[idx].selected = !this.datalist[idx].selected
+                }
+            }
+       })
+    </script>
+</body>
+</html>
