@@ -332,6 +332,12 @@
 
 ## day3-1
 
+### 面试题
+* 响应式属性在哪个生命周阶段处理：创建阶段
+* 在父子组件通讯过程中，在哪个生命周期函数最先获取到父组件传入的数据
+* 在mounted生命周期函数中设置了定时器，组件销毁时定时器是否还在运行，如何清除
+    * ajax请求 -> 如何取消ajax请求（xhr.abort()）
+
 ### 复习
 * 组件（模块化开发）
     * 目的
@@ -364,6 +370,12 @@
                 1. 接收方：自定义事件，绑定父组件事件处理函数
                 2. 发送方：触发自定义事件
         * 内容通讯：插槽slot
+            * 组件外->组件内：
+                * 默认插槽：`<slot>`
+                * 具名插槽：`<slot name="xx">`
+            * 组件内->组件外: 作用域插槽
+                1. 把需要传递的参数写入slot属性
+                2. v-slot="scope" (scope为写入solt的所有属性组成的对象)
 
     ```js
         <my-component></my-component>
@@ -371,3 +383,27 @@
         <my-component :data="{}"></my-component>
         <my-component></my-component>
     ```
+
+### 知识点
+* 生命周期函数
+    * 创建阶段	Creating
+        * beforeCreate
+        * created
+    * 挂载阶段	Mounting
+        * beforeMount
+        * mounted
+    * 更新阶段	Updating
+        * beforeUpdate
+        * updated
+    * 销毁阶段	Destroying
+        * beforeDestroy
+        * destroyed
+
+    > 要求：
+        * 记住生命周期函数的名字
+        * 了解每个阶段Vue做了什么操作
+        * 在每个生命周函数中我们适合做什么操作
+
+* 单文件组件
+* Vue-cli
+* Vue-Router

@@ -32,7 +32,10 @@
                 <input type="text" class="form-control" v-model="title" ref="title" @keyup.13="addItem">
                 <div class="input-group-btn">
                     <!-- <button type="button" class="btn btn-success" v-on:click="addItem">添加</button> -->
-                    <todo-button class="btn-success" idx="10" v-on:click.native="addItem">添加</todo-button>
+                    <todo-button class="btn-success" idx="10" v-on:click.native="addItem">
+                        <template v-slot:cn="mycn">添加{{mycn.username}}</template>
+                        <template v-slot:en="myen">Add{{myen.age}}</template>
+                    </todo-button>
                 </div>
             </div>
         </template>
@@ -156,7 +159,17 @@
 
         Vue.component('todoButton',{
             // props:['idx'],
-            template:`<button class="btn"><slot/></button>`,
+            data(){
+                return {
+                    username:'dingding',
+                    age:32
+                }
+            },
+            template:`<button class="btn">
+                <slot name="cn" :username="username" idx="10"/>
+                <slot name="en" :age="age"/>
+                <slot/>
+            </button>`,
             // mounted(){
             //     console.log(this.idx)
             // }
