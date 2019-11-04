@@ -31,7 +31,8 @@
             <div class="input-group">
                 <input type="text" class="form-control" v-model="title" ref="title" @keyup.13="addItem">
                 <div class="input-group-btn">
-                    <button type="button" class="btn btn-success" v-on:click="addItem">添加</button>
+                    <!-- <button type="button" class="btn btn-success" v-on:click="addItem">添加</button> -->
+                    <todo-button class="btn-success" idx="10" v-on:click.native="addItem">添加</todo-button>
                 </div>
             </div>
         </template>
@@ -73,8 +74,10 @@
                 <td>{{item.done?'是':'否'}}</td>
                 <td>
                     <div class="btn-group btn-group-sm">
-                        <button class="btn btn-default" @click.stop="completeItem(item.id)">完成</button>
-                        <button class="btn btn-danger" @click.stop="removeItem(idx)">删除</button>
+                        <!-- <button class="btn btn-default" @click.stop="completeItem(item.id)">完成</button>
+                        <button class="btn btn-danger" @click.stop="removeItem(idx)">删除</button> -->
+                        <todo-button class="btn-default" @click.stop.native="completeItem(item.id)">完成</todo-button>
+                        <todo-button class="btn-danger" @click.stop.native="removeItem(idx)">删除</todo-button>
                     </div>
                 </td>
             </tr>
@@ -151,7 +154,13 @@
             }
         });
 
-
+        Vue.component('todoButton',{
+            // props:['idx'],
+            template:`<button class="btn"><slot/></button>`,
+            // mounted(){
+            //     console.log(this.idx)
+            // }
+        })
         
 
 
@@ -214,6 +223,7 @@
 
                 Bus.$on('complete',this.completeItem)
                 Bus.$on('remove',this.removeItem)
+
 
                 // this.$on('complete',this.completeItem)
                 // this.$on('remove',this.removeItem)
