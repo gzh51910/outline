@@ -403,7 +403,50 @@
         * 记住生命周期函数的名字
         * 了解每个阶段Vue做了什么操作
         * 在每个生命周函数中我们适合做什么操作
+    
+## day3-2
+
+### 知识点
+* 模块化开发规范
+    * AMD       require.js
+    * CMD       sea.js
+    * commonjs  node.js
+    * ESModule  ES6
+
+* npm script
+    * package.json文件中的scripts命令
+    * 运行格式：
+        * npm run <name>
+        * 特殊命令
+            * start : npm start
+            * test : npm test
 
 * 单文件组件
-* Vue-cli
+    * 后缀名：.vue （TodoList.vue, TodoFrom.vue）
+        * html
+        * js
+        * css
+    * 编译
+        * webpack
+    ```js
+        <template id="name"></template>
+        Vue.component('name',{
+            template:`#name`
+        });
+    ```
+* ESModule
+    * 前端模块开发，在ESModule有一个重要的对象：模块对象
+        > 如何查看模块对象：`import * as all from <url>`
+    * 导出： export 
+        > 往模块对象中写入属性
+    * 导入：`import xxx from <url>`
+        > 读取模块对象中的属性
+
+* Vue-cli Vue脚手架
+    * 创建项目
+    * 热更新
+    * webpack
+    * commonJS
+    * ESModule
+
 * Vue-Router
