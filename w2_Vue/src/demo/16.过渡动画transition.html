@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>16.过渡动画transition</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/animate.min.css" />
+    <script src="js/vue.js"></script>
+    <style>
+        /* 默认 */
+        .v-enter-active{transition:opacity,1s}
+        .v-enter{opacity: 0;}
+        .v-enter-to{opacity: 1;}
+
+        .v-leave-active{transition:opacity,1s}
+        .v-leave{opacity: 1;}
+        .v-leave-to{opacity: 0;}
+
+        .slide-enter-active{transition:all,5s}
+        div.slide-enter{top: 160px;}
+        div.slide-enter-to{top: 0;}
+
+        .slide-leave-active{transition:top,5s}
+        div.slide-leave{top: 0;}
+        div.slide-leave-to{top: -160px;}
+
+        .container{position: relative;width:100%;height:160px;}
+        [class^="page"]{
+            position: absolute;left:0;top:0;right:0;bottom:0;background-color:#fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>16.过渡动画transition</h1>
+    <div id="app" style="padding:15px;">
+        <ul class="nav nav-tabs">
+            <li 
+            :class="{active:idx===activeIndex}" 
+            v-for="(item,idx) in menu"
+            v-on:click="changeMenu(idx)"
+            >
+                <a href="#">{{item.text}}</a>
+            </li>
+        </ul>
+        <div class="container">
+            <!-- <transition name="slide"> -->
+            <transition
+            enter-class=""
+            enter-active-class="animated"
+            enter-to-class="bounceInRight"
+            leave-class=""
+            leave-active-class="animated"
+            leave-to-class="bounceOutLeft"
+            >
+
+                <component :is="currentComponent"></component>
+            </transition>
+        </div>
+    </div>
+    <script>
+        /**
+            16.过渡动画transition
+                * 在Vue中使用过渡动画的条件
+                    1. 状态的改变
+                        * 通过样式的改变
+                        * 通过js改变
+                    2. 使用<transition> 或 <transition-group>
+                    3. 动画元素必须发生进入状态和离开状态
+                        * 如何让组件发生进入状态和离开状态
+                            * 条件渲染 (使用 v-if)
+                            * 条件展示 (使用 v-show)
+                            * 动态组件
+                                * component
+                            * 组件根节点
+
+                * 自定义类名：
+                    * name
+                * 利用第三方动画库实现过渡效果
+                    * animate.css
+        */
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                activeIndex: 0,
+                currentComponent:'homepage',
+                menu: [{
+                    text: '首页',
+                    name: 'home'
+                },
+                {
+                    text: '列表页',
+                    name: 'list'
+                },
+                {
+                    text: '注册',
+                    name: 'reg'
+                },
+                {
+                    text: '登录',
+                    name: 'login'
+                },
+                {
+                    text: '我的',
+                    name: 'mine'
+                }]
+            },
+            methods:{
+                changeMenu(idx){
+                    this.activeIndex = idx;
+                    this.currentComponent = this.menu[idx].name+'page'
+                }
+            },
+            created(){
+                this.menu.forEach(item=>{
+                    this.$options.components[item.name+'page'] = {
+                        data(){
+                            return {
+                                qty:1
+                            }
+                        },
+                        template:`<div class="page-${item.name}">
+                           <h4> ${item.text}</h4>
+                           <button class="btn btn-success" @click="changeQty">{{qty}}</button>
+                        </div>`,
+                        created(){
+                            console.log(item.name+'create')
+                        },
+                        destroyed(){
+                            console.log(item.name+'destroy')
+                        },
+                        methods:{
+                            changeQty(){
+                                this.qty++;
+                            }
+                        }
+                    }
+                })
+            }
+        });
+
+        // vm.$mount('#app')
+    </script>
+</body>
+
+</html>
