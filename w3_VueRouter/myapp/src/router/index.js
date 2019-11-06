@@ -10,6 +10,8 @@ import Reg from '../pages/Reg.vue';
 import Login from '../pages/Login.vue';
 import Mine from '../pages/Mine.vue';
 import Cart from '../pages/Cart.vue';
+import Goods from '../pages/Goods.vue';
+import List from '../pages/List.vue';
 import NotFound from '../pages/NotFound.vue';
 
 // 3. 实例化VueRouter并配置参数
@@ -19,8 +21,21 @@ const router = new VueRouter({
     routes: [
         // 当浏览器地址为/home时，显示Home组件的内容（显示在<router-view/>组件中）
         {
+            name:'home',
             path: '/home',
             component: Home
+        },
+        {
+            name:'list',
+            path:'/list',
+            component:List
+        },
+
+        // 动态路由
+        {
+            name:'goods',
+            path:'/goods/:id',
+            component:Goods
         },
         {
             path:'/',
@@ -28,18 +43,22 @@ const router = new VueRouter({
             // component:Home
         },
         {
+            name:'reg',
             path: '/reg',
             component: Reg
         },
         {
+            name:'login',
             path: '/login',
             component: Login
         },
         {
+            name:'mine',
             path: '/mine',
             component: Mine
         },
         {
+            name:'cart',
             path: '/cart',
             component: Cart
         },
@@ -47,6 +66,7 @@ const router = new VueRouter({
 
         // 404页面
         {
+            name:'404',
             path:'*',
             component:NotFound
         }

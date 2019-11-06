@@ -486,8 +486,8 @@
         2. 使用
         3. 实例化并配置参数
         4. 注入Vue实例
-        5. 在组件中使用router
-            <router-view> 
+        5. 在组件中使用<router-view/>来显示内容
+            
     * 路由模式
         * hash路由
             > hash路由的原理：hashchange事件
@@ -495,3 +495,38 @@
                 window.onhashchange
             ```
         * history路由
+    * 路由导航
+        * 声明式导航：`<router-link>`
+            * to
+                * '/home'
+                * '{path:'/home'}'
+            * active-class/exact-active-class
+                ```js
+                    '/'
+                    '/list'
+                ```
+            * tag
+        * 编程式导航：通过js代码实现跳转
+            > 如何获取以下对象：this.$Router,this.$route
+            * router：用来跳转页面
+                * router.push()     跳转页面并留下浏览记录
+                * router.replace()  跳转页面，不保留任何浏览记录
+                * router.go()/router.back()/router.forward()
+            * route: 保存当前路由信息的对象
+        * 路由传参
+            * 跳转时传参
+                * params : 页面刷新会丢失（例外：prams的参数作为动态路由时）
+                    > params传参只能通过name方式跳转
+                    ```js
+                        this.$router.push({path:'/goods',params:{id}});//不支持写法
+                        this.$router.push({name:'goods',params:{id}})
+                    ```
+                    * 动态路由传入
+                * query: 属性成为url参数，刷新页面依然存在
+
+* UI框架
+    * element-ui       饿了么
+    * ant-design       阿里
+    * iView            腾讯
+    * ...
+                
