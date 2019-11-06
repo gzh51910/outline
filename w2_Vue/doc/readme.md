@@ -449,4 +449,49 @@
     * commonJS
     * ESModule
 
+
+## day3-3
+
+### 复习
+* 单文件组件（.vue）
+    * template
+    * script
+    * style
+* webpack
+* vue-cli
+    * `import vue from 'vue'`
+    * 热更新：监听文件修改，当文件有修改时，webpack重新编译
+* ESModule
+    > 重要的东西：模块对象
+    * 导入import
+        > 从模块对象中读取属性
+        * 格式：`import xxx from <url>`
+    * 导出export
+        > 往模块对象添加属性，export后只能跟 var,let,const,function,class,default,{}
+        * 格式：`export xxx`
+    * as
+        ```js
+            import {xx as xxx} from 'xxx'
+            export {xx as xxx}
+        ```
+    * *
+
+### 知识点
+
+* 多页面应用MPA（Multiple Page Application）
+* 单页面应用SPA（Single Page Application）
 * Vue-Router
+    * 使用步骤
+        1. 引入
+        2. 使用
+        3. 实例化并配置参数
+        4. 注入Vue实例
+        5. 在组件中使用router
+            <router-view> 
+    * 路由模式
+        * hash路由
+            > hash路由的原理：hashchange事件
+            ```js
+                window.onhashchange
+            ```
+        * history路由

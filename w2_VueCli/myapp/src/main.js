@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 
-window.console.log('App',App)
+// let username = 'laoxie'
+// console.log('App',App)
 
 // // 导入
 // import mymodule from './js/esmodule'
