@@ -32,7 +32,7 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   data() {
@@ -49,7 +49,7 @@ export default {
   async created() {
     let {
       data: { datas }
-    } = await axios.get("https://www.nanshig.com/mobile/index.php?act=index");
+    } = await this.$axios.get("https://www.nanshig.com/mobile/index.php?act=index");
     console.log(datas);
 
     // 轮播图数据

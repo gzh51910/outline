@@ -529,4 +529,32 @@
     * ant-design       阿里
     * iView            腾讯
     * ...
+* ajax请求
+    * axios
+
+## day3-4
+
+### 复习
+* VueRouter的使用步骤
+* 如何显示路由组件
+    > `<router-view/>`
+* 路由导航
+    * 声明式导航：`<router-link/>`
+    * 编程式导航：
+        * router: this.$router 路由实例
+            * 跳转方式
+                * name
+                * path
+            * 调转方法
+                * push()
+                * replace()
+                * back()/forward()/go()
+        * route: this.$route 当前路由信息
+    * 路由传参
+        * 跳转时传参
+            * params
+                > params参数传递只能通过name方式跳转
+                * 动态路由
+            * query
+        * 定义时传参
                 

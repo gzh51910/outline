@@ -9,7 +9,10 @@
       active-text-color="#ffd04b"
     >
       <!-- <el-menu-item :index="item.name" v-for="item in menu" :key="item.name">{{item.text}}</el-menu-item> -->
-      <el-menu-item :index="item.path" v-for="item in menu" :key="item.name">{{item.text}}</el-menu-item>
+      <el-menu-item :index="item.path" v-for="item in menu" :key="item.name">
+         <i :class="item.icon"></i>
+        {{item.text}}
+        </el-menu-item>
     </el-menu>
     <main>
       <router-view />
@@ -27,22 +30,26 @@ export default {
         {
           name: "home",
           path: "/home",
-          text: "首页"
+          text: "首页",
+          icon:'el-icon-s-home'
         },
         {
           name: "list",
           path: "/list",
-          text: "列表"
+          text: "列表",
+          icon:'el-icon-menu'
         },
         {
           name: "cart",
           path: "/cart",
-          text: "购物车"
+          text: "购物车",
+          icon:'el-icon-shopping-cart-2'
         },
         {
           name: "mine",
           path: "/mine",
-          text: "我的"
+          text: "我的",
+          icon:'el-icon-s-custom'
         },
         // {
         //   name: "reg",
@@ -88,6 +95,12 @@ body{margin:0;}
   del::before{
     content:'￥'
   }
-  span{color:#f00;}
+  span{
+    color:#f00;
+    &::before{
+      content:'￥'
+    }
+  }
+  
 }
 </style>
