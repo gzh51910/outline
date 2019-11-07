@@ -58,7 +58,13 @@ export default {
     this.datalist = datas.slice(1).map(item => {
       return item.goods;
     });
-  }
+  },
+
+  // 组件内守卫
+  // beforeRouteLeave(to,from,next){
+  //   console.log('home.beforeRouteLeave');
+  //   next();
+  // }
 };
 </script>
 <style lang="scss">

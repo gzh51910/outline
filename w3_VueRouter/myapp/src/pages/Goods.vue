@@ -42,6 +42,10 @@ export default {
     };
   },
   watch:{
+    //   可以监听实例下任何属性
+    //   info(newval,oldVal){
+
+    //   },
     //   $route:function(newVal,oldVal){
     //       console.log(newVal,oldVal);
     //       if(newVal.params.id !== oldVal.params.id){
@@ -57,8 +61,8 @@ export default {
           this.$router.push(`/goods/${id}`);
         //   this.$forceUpdate();
       },
-      async getData(){
-        let { id } = this.$route.params;
+      async getData(id){
+        //
         console.log(this.$route);
         let {
         data: { datas }
@@ -89,17 +93,27 @@ export default {
       }
   },
   created() {
-    this.getData();
+     let { id } = this.$route.params;
+    this.getData(id);
   },
-  beforeRouteUpdate (to, from, next) {
+//   beforeRouteEnter(to, from, next){
+//       console.log('Goods.beforeRouteEnter')
+//       next();
+//   },
+//   beforeRouteLeave(to, from, next){
+//       console.log('Goods.beforeRouteLeave');
+//       next();
+//   },
+  beforeRouteUpdate (to, from, next) {console.log('Goods.beforeRouteUpdate')
         //to:目标路由
         //from:当前路由
         //一定要调用next()方法才可进入目标路由
         if(to.params.id !== from.params.id){
-            this.getData();
+            this.getData(to.params.id);
         }
         next();
     }
+
 };
 </script>
 <style lang="scss">

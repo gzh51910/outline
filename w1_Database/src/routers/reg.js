@@ -11,7 +11,8 @@ Router.post('/',async (req,res)=>{
     let {username,password} = req.body;
 
     let result = await create(colName,{username,password})
-    if(result.ok){
+    
+    if(result.insertedCount>0){
         res.send(formatData());
     }else{
         res.send(formatData({status:0}));

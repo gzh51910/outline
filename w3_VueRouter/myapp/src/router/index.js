@@ -35,7 +35,10 @@ const router = new VueRouter({
         {
             name:'goods',
             path:'/goods/:id',
-            component:Goods
+            component:Goods,
+            beforeEnter(to,from,next){console.log('Goods.beforeEnter')
+                next();
+            }
         },
         {
             path:'/',
@@ -72,6 +75,16 @@ const router = new VueRouter({
         }
     ]
 });
+
+// 全局路由守卫
+// router.beforeEach((to,from,next)=>{
+//     console.log('全局.beforeEach');
+//     next();
+// })
+
+// router.afterEach((to,from)=>{
+//     console.log('全局.afterEach')
+// })
 
 // 4.导出router实例，并把router实例注入到vue实例中
 export default router;

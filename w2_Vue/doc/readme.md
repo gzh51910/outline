@@ -555,6 +555,19 @@
             * params
                 > params参数传递只能通过name方式跳转
                 * 动态路由
+                    * 监听路由改变
+                        * watch/$watch()
+                        * beforeRouteUpdate(to,from,next) 路由守卫
             * query
         * 定义时传参
+
+    
+* 路由守卫
+    * 全局守卫
+    * 路由独享的守卫
+    * 组件内的守卫
+
+* 用户权限控制
+* 免登陆效果
+    * token
                 
