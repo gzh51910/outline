@@ -14,6 +14,9 @@
       <el-form-item label="密码" prop="password" :error="errorMsg">
         <el-input type="password" v-model="loginForm.password"></el-input>
       </el-form-item>
+      <el-form-item prop="mdl">
+        <el-checkbox v-model="loginForm.mdl">下次免登陆</el-checkbox>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitForm('numberValidateForm')">登录</el-button>
       </el-form-item>
@@ -28,6 +31,7 @@ export default {
       loginForm: {
         username: "",
         password: "",
+        mdl:true
       },
       rules: {
         username: [
@@ -65,7 +69,11 @@ export default {
                     // console.log('不行')
                     this.errorMsg = '用户名或密码错误'
                 }else{
-                    this.$router.replace('/mine')
+                    // 获取token并保存到本地
+                    let Authorization = data.data;
+                    localStorage.setItem('Authorization',Authorization);
+                    let {redirectUrl} = this.$route.query || '/mine'
+                    this.$router.replace(redirectUrl)
                 }
             } else {
                 console.log('error submit!!');

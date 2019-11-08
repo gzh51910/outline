@@ -61,8 +61,8 @@ export default {
           this.$router.push(`/goods/${id}`);
         //   this.$forceUpdate();
       },
-      async getData(id){
-        //
+      async getData(){
+        let { id } = this.$route.params;
         console.log(this.$route);
         let {
         data: { datas }
@@ -93,8 +93,7 @@ export default {
       }
   },
   created() {
-     let { id } = this.$route.params;
-    this.getData(id);
+    this.getData();
   },
 //   beforeRouteEnter(to, from, next){
 //       console.log('Goods.beforeRouteEnter')
@@ -108,10 +107,10 @@ export default {
         //to:目标路由
         //from:当前路由
         //一定要调用next()方法才可进入目标路由
-        if(to.params.id !== from.params.id){
-            this.getData(to.params.id);
-        }
         next();
+        if(to.params.id !== from.params.id){
+            this.getData();
+        }
     }
 
 };

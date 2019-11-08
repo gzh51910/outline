@@ -100,14 +100,14 @@ body {
   font-weight: bold;
 }
 .price {
-  del {
+  >del {
     color: #999;
     margin-right: 5px;
   }
-  del::before {
+  >del::before {
     content: "￥";
   }
-  span {
+  >span {
     color: #f00;
     &::before {
       content: "￥";

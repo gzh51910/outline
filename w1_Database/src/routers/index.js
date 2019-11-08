@@ -2,6 +2,8 @@ const express = require('express');
 
 let Router = express.Router();
 
+const {token,formatData} = require('../utils')
+
 let loginRouter = require('./login');
 let goodsRouter = require('./goods');
 let userRouter = require('./user');
@@ -35,6 +37,15 @@ Router.use(express.json(),express.urlencoded({extended:false}));
 Router.use('/login',loginRouter)
 Router.use('/goods',goodsRouter)
 Router.use('/user',userRouter)
-Router.use('/reg',regRouter)
+Router.use('/reg',regRouter);
+Router.get('/verify',(req,res)=>{
+    // 获取请求头上的token
+    let Authorization = req.get('Authorization');
+    if(token.verify(Authorization)){
+        res.send(formatData())
+    }else{
+        res.send(formatData({status:0}))
+    }
+})
 
 module.exports = Router;

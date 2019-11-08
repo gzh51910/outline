@@ -36,9 +36,9 @@ const router = new VueRouter({
             name:'goods',
             path:'/goods/:id',
             component:Goods,
-            beforeEnter(to,from,next){console.log('Goods.beforeEnter')
-                next();
-            }
+            // beforeEnter(to,from,next){console.log('Goods.beforeEnter')
+            //     next();
+            // }
         },
         {
             path:'/',
@@ -58,12 +58,14 @@ const router = new VueRouter({
         {
             name:'mine',
             path: '/mine',
-            component: Mine
+            component: Mine,
+            meta: { requiresAuth: true }
         },
         {
             name:'cart',
             path: '/cart',
-            component: Cart
+            component: Cart,
+            // meta: { requiresAuth: true }
         },
         
 
@@ -76,11 +78,48 @@ const router = new VueRouter({
     ]
 });
 
+console.log('router',router)
+
 // 全局路由守卫
-// router.beforeEach((to,from,next)=>{
-//     console.log('全局.beforeEach');
-//     next();
-// })
+router.beforeEach((to,from,next)=>{
+    if(to.meta.requiresAuth){
+        // 获取token
+        let Authorization = localStorage.getItem('Authorization');
+        if(Authorization){
+            // 登录则放行
+            next();
+
+            // 发送校验请求
+            router.app.$axios.get('http://localhost:1910/verify',{
+                headers:{
+                    Authorization
+                }
+            }).then(({data})=>{
+                console.log('校验结果：',data)
+                if(data.status === 0){
+                    next({
+                        path:'/login',
+                        query:{
+                            redirectUrl:to.fullPath
+                        }
+                    })
+                }
+            })
+        }else{
+            // 否则跳到登录页面
+            // router.push('/login')
+            next({
+                path:'/login',
+                query:{
+                    redirectUrl:to.fullPath
+                }
+            })
+        }
+    }else{
+        next();
+    }
+    console.log('全局.beforeEach');
+})
 
 // router.afterEach((to,from)=>{
 //     console.log('全局.afterEach')
