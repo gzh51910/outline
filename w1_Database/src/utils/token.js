@@ -7,7 +7,7 @@ const secretKey = 'laoxie';
  * @param {Number|String} expiresIn     有效期
  * @return {String}                     返回token
  */
-function create(data,expiresIn=20){
+function create(data,expiresIn=2*60*60){
     var token = jwt.sign(
         data,
         secretKey, // 密钥

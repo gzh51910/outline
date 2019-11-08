@@ -587,4 +587,21 @@
         * 校验通过，放行
         * 校验不通过（失效，篡改），则跳到登录页面
 
+
+* Vuex
+    
+    * 核心概念
+        * Store     存储空间（仓库）
+            * state         真正存放数据的位置  (类似与组件中的data))
+            * mutations     修改State的方法（类似与组件中的methods）
+
+    * 使用步骤
+        1. 引入
+        2. 使用和安装
+        3. 实例化Store
+        4. 注入Vue实例
+        5. 在组件中通过`this.$store`
+    * 操作state
+        * 获取state：`this.$store.state.xxx`
+        * 修改state
                 
