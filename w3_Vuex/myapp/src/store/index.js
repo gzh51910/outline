@@ -37,6 +37,12 @@ let store = new Vuex.Store({
       ]
   },
 
+  getters:{
+    totalPrice(state){
+      return state.goodslist.reduce((prev,item)=>prev+item.price*item.qty,0);
+    }
+  },
+
 //   mutation的调用方式：store.commit(mutation)
   mutations:{
     // 删除单个商品
@@ -69,10 +75,29 @@ let store = new Vuex.Store({
             }
         })
     }
+  },
+
+  // actions：间接修改state的方式
+  // 触发action: store.dispatch(action)
+  actions:{
+    // context: 一个类似于store的对象
+    // payload: 触发action时传入的参数
+    async changeQtyAsync(context,{id,qty}){
+      console.log('context',context);
+      // 发起ajax请求
+      let {data:{data}} = await store._vm.$axios.get(`http://localhost:1910/goods/${id}/kucun`);
+      if(qty>data){
+        qty = data;
+      }
+      console.log(id,qty,data)
+      context.commit('changeQty',{id,qty})
+    }
   }
 })
 // 5.在组件中使用vuex
 // this.$store.state.goodslist
+
+console.log('store:',store)
 
 // 4. 把store导出并注入Vue实例
 export default store;

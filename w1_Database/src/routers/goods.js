@@ -126,6 +126,12 @@ Router.patch('/:id/like',(req,res)=>{
     res.send(`商品${id}修改成功`)
 })
 
+Router.get('/:id/kucun',(req,res)=>{
+    setTimeout(()=>{
+        res.send(formatData({data:5}))
+
+    },1000)
+})
 
 // 利用route()方法简化同路径接口操作
 // Router.route('/:id')

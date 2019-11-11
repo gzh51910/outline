@@ -593,7 +593,9 @@
     * 核心概念
         * Store     存储空间（仓库）
             * state         真正存放数据的位置  (类似与组件中的data))
+            * getters       类似于组件中的computed
             * mutations     修改State的方法（类似与组件中的methods）
+            * actions       异步修改Stated的方法 
 
     * 使用步骤
         1. 引入
@@ -603,5 +605,10 @@
         5. 在组件中通过`this.$store`
     * 操作state
         * 获取state：`this.$store.state.xxx`
-        * 修改state
+        * 修改state：`this.$store.commit()`
+    * 映射Vuex
+        * mapState          映射到computed
+        * mapGetters        映射到computed
+        * mapMutaitions     映射到methods
+        * mapActions        映射到methods
                 
