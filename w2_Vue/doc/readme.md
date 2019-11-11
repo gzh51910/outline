@@ -611,4 +611,7 @@
         * mapGetters        映射到computed
         * mapMutaitions     映射到methods
         * mapActions        映射到methods
+    * 模块化store
+        * modules:{...}
+        > 只是影响了state的获取，可以使用**命名空间**来实现mutations,getters,actionsd的分类获取
                 

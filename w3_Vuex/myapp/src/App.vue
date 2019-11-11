@@ -24,10 +24,11 @@
         </el-menu>
       </el-col>
       <el-col :span="6" style="text-align:right;line-height:60px;">
-        <!-- <el-button-group> -->
+        <el-button type="text" @click="logout" v-if="isLogin">退出</el-button>
+        <template v-else>
           <el-button type="text" @click="goto('/reg')">注册</el-button>
           <el-button type="text" @click="goto('/login')">登录</el-button>
-        <!-- </el-button-group> -->
+        </template>
       </el-col>
     </el-row>
 
@@ -38,6 +39,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
 export default {
   name: "app",
   data() {
@@ -83,16 +85,36 @@ export default {
   },
   computed:{
     cartlength(){
-      return this.$store.state.goodslist.length
+      // console.log('state:',this.$store.state)
+      return this.$store.state.cart.goodslist.length
     },
+    isLogin(){
+      return Boolean(this.$store.state.common.user.Authorization);
+    }
   },
   methods: {
     goto(path) {
       this.$router.push(path);
+    },
+    // ...mapMutations(['logout']),
+    logout(){
+      this.$store.commit('logout');
+
+      // 在需要登录权限的页面退出登录
+      // 需要跳转到登录页面
+      if(this.$route.meta.requiresAuth){
+        this.$router.push({
+          name:'login',
+          query:{
+            redirectUrl:this.$route.fullPath
+          }
+        })
+
+      }
     }
   },
   created() {
-    console.log(this.$route);
+    console.log(this);
     // 刷新保持高亮
     this.activeIndex = this.$route.path;
   }

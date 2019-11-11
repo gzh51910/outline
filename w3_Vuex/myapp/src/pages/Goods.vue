@@ -93,7 +93,7 @@ export default {
       },
       add2cart(){
         let {goods_id:id,goods_image:imgurl,goods_name:name,goods_promotion_price:price} = this.info;
-        let {goodslist} = this.$store.state;
+        let {goodslist} = this.$store.state.cart;
         // 判断当前商品是否已经存在购物车
         // 已存在：数量+1
         // 否则：添加到购物车

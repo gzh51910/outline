@@ -42,13 +42,18 @@ export default {
   },
   computed:{
     // goodslist(){
-    //   return this.$store.state.goodslist
+    //   return this.$store.state.cart.goodslist
     // },
       // totalPrice(){
       //     // return this.goodslist.reduce((prev,item)=>prev+item.price*item.qty,0);
       //     return this.$store.getters.totalPrice
       // },
-    ...mapState(['goodslist']),
+    // ...mapState(['goodslist']),
+    ...mapState({
+      goodslist(state){
+        return state.cart.goodslist
+      }
+    }),
     ...mapGetters(['totalPrice'])
   },
   methods:{

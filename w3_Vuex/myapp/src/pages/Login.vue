@@ -58,22 +58,26 @@ export default {
                 console.log('success');
 
                 let {username,password} = this.loginForm;
-                let {data} = await this.$axios.get('http://localhost:1910/login',{
+                let result = await this.$axios.get('http://localhost:1910/login',{
                     params:{
                         username,
                         password
                     }
                 });
-                console.log(data)
+                console.log('result:',result);
+                let {data,headers} = result;
                 if(data.status === 0){
                     // console.log('不行')
                     this.errorMsg = '用户名或密码错误'
                 }else{
-                    // 获取token并保存到本地
-                    let Authorization = data.data;
-                    localStorage.setItem('Authorization',Authorization);
-                    let {redirectUrl} = this.$route.query || '/mine'
-                    this.$router.replace(redirectUrl)
+                    
+
+                    let user = data.data[0];
+                    // 从响应头中获取Authorization
+                    user.Authorization = headers.authorization
+                    this.$store.commit('login',user)
+                    let redirectUrl = this.$route.query.redirectUrl || '/mine';console.log('redirectUrl:',redirectUrl)
+                    this.$router.push(redirectUrl)
                 }
             } else {
                 console.log('error submit!!');

@@ -84,7 +84,9 @@ console.log('router',router)
 router.beforeEach((to,from,next)=>{
     if(to.meta.requiresAuth){
         // 获取token
-        let Authorization = localStorage.getItem('Authorization');
+        // let Authorization = localStorage.getItem('Authorization');
+        let $store = router.app.$store
+        let Authorization = $store.state.common.user.Authorization;
         if(Authorization){
             // 登录则放行
             next();
@@ -97,6 +99,7 @@ router.beforeEach((to,from,next)=>{
             }).then(({data})=>{
                 console.log('校验结果：',data)
                 if(data.status === 0){
+                    $store.commit('logout');
                     next({
                         path:'/login',
                         query:{
