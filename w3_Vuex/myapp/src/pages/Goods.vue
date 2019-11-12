@@ -35,6 +35,7 @@
   <div v-else v-loading.fullscreen.lock="true"></div>
 </template>
 <script>
+import {nsg} from '../Api'
 export default {
   data() {
     return {
@@ -64,15 +65,24 @@ export default {
       async getData(){
         let { id } = this.$route.params;
         console.log(this.$route);
+        // let {
+        // data: { datas }
+        // } = await this.$axios.get("https://www.nanshig.com/mobile/index.php", {
+        // params: {
+        //     act: "goods",
+        //     op: "goods_detail",
+        //     goods_id: id,
+        //     key: ""
+        // }
+        // });
+
         let {
-        data: { datas }
-        } = await this.$axios.get("https://www.nanshig.com/mobile/index.php", {
-        params: {
+          data: { datas }
+        } = await nsg.get({
             act: "goods",
             op: "goods_detail",
             goods_id: id,
             key: ""
-        }
         });
 
         console.log(datas);

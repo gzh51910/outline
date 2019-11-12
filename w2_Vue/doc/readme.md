@@ -614,4 +614,10 @@
     * 模块化store
         * modules:{...}
         > 只是影响了state的获取，可以使用**命名空间**来实现mutations,getters,actionsd的分类获取
-                
+    
+* hard code 硬编码
+    > 尽量避免在项目中使用hardcode
+
+* axios二次封装
+    * baseURL
+    * axios.create()     

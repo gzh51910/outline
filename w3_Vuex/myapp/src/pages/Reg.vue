@@ -18,6 +18,7 @@
   </div>
 </template>
 <script>
+import {my} from '../Api'
 export default {
   data() {
     var checkUsername = (rule, value, callback) => {
@@ -70,7 +71,11 @@ export default {
                 console.log('success');
 
                 let {username,password} = this.regForm;
-                let {data} = await this.$axios.post('http://localhost:1910/reg',{
+                // let {data} = await this.$axios.post('http://localhost:1910/reg',{
+                //     username,
+                //     password
+                // });
+                 let {data} = await my.post('/reg',{
                     username,
                     password
                 });

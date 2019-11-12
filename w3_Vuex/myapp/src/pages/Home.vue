@@ -32,7 +32,9 @@
   </div>
 </template>
 <script>
-// import axios from "axios";
+// 导入模块对象中的nsg属性
+// import {nsg} from '../Api';
+import Api,{nsg} from '../Api'
 
 export default {
   data() {
@@ -49,7 +51,9 @@ export default {
   async created() {
     let {
       data: { datas }
-    } = await this.$axios.get("https://www.nanshig.com/mobile/index.php?act=index");
+    } = await Api.nsg.get({
+      act:'index'
+    },{headers:{}});  //this.$axios.get("https://www.nanshig.com/mobile/index.php?act=index");
     console.log(datas);
 
     // 轮播图数据

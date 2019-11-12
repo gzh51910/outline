@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>18.不常用的指令</title>
+    <script src="js/vue.js"></script>
+    <style>
+        code{display:block;padding:10px;background-color:#efefef;border:1px solid #ccc}
+        [v-cloak]{display:none}
+    </style>
+</head>
+<body>
+    <h1>18.不常用的指令</h1>
+    <div id="view">
+        <h4 v-cloak>{{username}}</h4>
+        <h4 v-once>v-once:{{username}}</h4>
+
+        Vue的数据绑定方式:
+        <code>
+            <p v-pre>{{username}}</p>
+        </code>
+    </div>
+    <script>
+        /**
+         * 18.不常用的指令
+            * v-pre
+            * v-cloak   解决数据闪现的问题(当数据成功绑定到视图后,自动消失,一般用来配合样式解决问题)
+            * v-once    只绑定一次数据(后续的数据更新不会影响v-once中的视图)
+         */
+
+         let vm = new Vue({
+             el:'#view',
+             data:{
+                 username:'laoxie'
+             }
+         })
+
+        //  setTimeout(()=>{
+        //      vm.$mount('#view')
+        //  },1000);
+        
+    </script>
+</body>
+</html>

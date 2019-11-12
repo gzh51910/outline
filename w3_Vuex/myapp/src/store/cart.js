@@ -1,3 +1,7 @@
+// import axios from 'axios';
+
+import {my} from '../Api';
+// import my from '../Api/my'
 export default {
     // 设置命名空间
     // namespaced: true,
@@ -79,12 +83,13 @@ export default {
         async changeQtyAsync(context, { id, qty }) {
             console.log('context', context);
             // 发起ajax请求
-            // let { data: { data } } = await store._vm.$axios.get(`http://localhost:1910/goods/${id}/kucun`);
-            // if (qty > data) {
-            //     qty = data;
-            // }
-            // console.log(id, qty, data)
-            // context.commit('changeQty', { id, qty })
+            // let { data: { data } } = await axios.get(`http://localhost:1910/goods/${id}/kucun`);
+            let { data: { data } } = await my.get(`/goods/${id}/kucun`)
+            if (qty > data) {
+                qty = data;
+            }
+            console.log(id, qty, data)
+            context.commit('changeQty', { id, qty })
         }
     }
 }

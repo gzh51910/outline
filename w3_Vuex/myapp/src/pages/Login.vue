@@ -24,6 +24,7 @@
   </div>
 </template>
 <script>
+import {my} from '../Api'
 export default {
   data() {
     return {
@@ -58,11 +59,15 @@ export default {
                 console.log('success');
 
                 let {username,password} = this.loginForm;
-                let result = await this.$axios.get('http://localhost:1910/login',{
-                    params:{
-                        username,
-                        password
-                    }
+                // let result = await this.$axios.get('http://localhost:1910/login',{
+                //     params:{
+                //         username,
+                //         password
+                //     }
+                // });
+                let result = await my.get('/login',{
+                  username,
+                  password
                 });
                 console.log('result:',result);
                 let {data,headers} = result;

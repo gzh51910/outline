@@ -14,7 +14,8 @@ Vue.config.productionTip = false
 // 使用ElementUI
 Vue.use(ElementUI);
 
-// axios
+// 全局设置axios基础路径(所有的Axios请求都基于这个路径访问)
+// axios.defaults.baseURL = 'https://www.nanshig.com/mobile/index.php'
 Vue.prototype.$axios = axios;
 
 new Vue({

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>19.自定义指令</title>
+    <script src="js/vue.js"></script>
+    <style>
+        code{display:block;padding:10px;background-color:#efefef;border:1px solid #ccc}
+        [v-cloak]{display:none}
+    </style>
+</head>
+<body>
+    <h1>19.自定义指令</h1>
+    <div id="view">
+        <p v-lx:laoxie.stop.a.b="value">自定义指令</p>
+        <button v-on:click="handle">点我</button>
+        <input v-autofocus />
+    </div>
+    <script>
+        /**
+         * 19.自定义指令(定义一个属性)
+            * 全局指令: Vue.directive(name,options)
+            * 局部指令: directives
+            
+            * 使用
+                * v-name
+            * 指令完整格式: v-名字:参数.修饰符=值(值必须是js表达式)
+         */
+
+         Vue.directive('lx',{
+            // 把指令绑定到节点时执行
+             bind(el,binding,vnode){
+                console.log(el,vnode)
+                console.log(binding)
+             }
+         })
+         
+
+        //  v-on指令的模拟:
+        //  Vue.directive('on',{
+        //      bind(el,{arg,value,modifiers},vnode){
+        //         el.addEventListener(arg,(e)=>{
+        //             value();
+        //             if(modifiers.stop){
+        //                 e.stopPropagation();
+        //             }
+        //             if(modifiers.prevent){
+        //                 e.preventDefault()
+        //             }
+        //         },modifiers.capture)
+        //      }
+        //  })
+
+        // 自动获得焦点指令
+        Vue.directive('autofocus',{
+            // 指令绑定时执行
+            bind(el){
+                // el.focus();
+            },
+
+            inserted(el){
+                el.focus();
+            }
+        })
+
+         let vm = new Vue({
+             el:'#view',
+             data:{
+                 value:'abc',
+                 username:'laoxie'
+             },
+             methods:{
+                 handle(){
+                     console.log(666)
+                 }
+             },
+             directives:{
+                 abc:{
+                     bind(el,binding){
+
+                     },
+                     inserted(el,binding){
+                         
+                     }
+                 }
+             }
+         })
+        
+    </script>
+</body>
+</html>
