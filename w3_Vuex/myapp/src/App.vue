@@ -39,6 +39,24 @@
 </template>
 
 <script>
+// 原始按需加载
+// import Row from 'element-ui/lib/row'
+// import 'element-ui/lib/theme-chalk/row.css'
+// Vue.use(Row);//Vue.component(Row.name,Row);
+
+// import Col from 'element-ui/lib/col'
+// import 'element-ui/lib/theme-chalk/col.css'
+// Vue.use(col);
+
+// 插件按需引入
+// import { Row, Col,Menu,MenuItem, Badge,Button} from 'element-ui';
+// Vue.component(Row.name, Row);
+// Vue.component(Col.name, Col);
+// Vue.component(Menu.name, Menu);
+// Vue.component(MenuItem.name, MenuItem);
+// Vue.component(Badge.name, Badge);
+// Vue.component(Button.name, Button);
+
 import {mapMutations} from 'vuex';
 export default {
   name: "app",
