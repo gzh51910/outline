@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>21.mixin</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>21.mixin</h1>
+    <div id="view">
+        <h1 @click="changeQty">Vue实例：{{qty}}</h1>
+        <my-header></my-header>
+        <my-body></my-body>
+        <my-footer></my-footer>
+    </div>
+    <script>
+        /**
+         * 21.mixin
+            * 全局：Vue.mixin(options)  影响所有组件实例，所以在实际开发中很少使用
+            * 局部：mixins
+         */
+
+        //  全局mixin
+        // Vue.mixin({
+        //     data(){
+        //         return {
+        //             qty:1
+        //         }
+        //     },
+        //     created(){
+        //         console.log(this.name,this);
+        //     },
+        //     methods:{
+        //         changeQty(){
+        //             this.qty++
+        //         }
+        //     }
+        // })
+
+        // 局部mixin
+        const myMixin = {
+            data(){
+                return {
+                    qty:1
+                }
+            },
+            created(){
+                console.log(this.name,this);
+            },
+            methods:{
+                changeQty(){
+                    this.qty++
+                }
+            }
+        }
+
+         Vue.component('myHeader',{
+             data(){
+                 return {
+                     name:'myHeader',
+                     qty:1
+                 }
+             },
+             template:`<div>
+             <myinput/>
+             <button @click="changeQty">{{name}}{{qty}}</button>
+             </div>`,
+             methods:{
+                changeQty(){
+                    this.qty++
+                }
+             },
+             components:{
+                 myinput:{
+                     data(){
+                         return {
+                             name:'myinput'
+                         }
+                     },
+                     template:`<input v-model="name"/>`
+                 }
+             }
+         })
+
+         
+         let vm = new Vue({
+             el:'#view',
+             data:{
+                 username:'myVue'
+             },
+             mixins:[myMixin],
+             components:{
+                 myBody:{
+                     data(){
+                         return {
+                             name:"myBody"
+                         }
+                     },
+                     mixins:[myMixin],
+                     created(){
+                        console.log('hello my name is myBody')
+                     },
+                     template:`<button @click="changeQty">{{name}}:{{qty}}</button>`
+                 },
+                 myFooter:{
+                     data(){
+                         return {
+                             name:"myFooter"
+                         }
+                     },
+                     template:`<button @click="changeQty">{{name}}:{{qty}}</button>`
+                 }
+             }
+         })
+        
+    </script>
+</body>
+</html>

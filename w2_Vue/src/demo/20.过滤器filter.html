@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>20.过滤器filter</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>20.过滤器filter</h1>
+    <div id="view">
+        <p>{{username}}</p>
+        <p>大写：{{username.toUpperCase()}}</p>
+        <!-- 以下写法等效于capitalize(username) -->
+        <p>首字母大写：{{username | capitalize}}</p>
+
+        <!-- 以下操作等效于: test(capitalize(username)) -->
+        <p>首字母大写：{{username | capitalize | test(100,200,300)}}</p>
+
+        <!-- 2019-11-12 -->
+        <p v-pre>日期格式化：{{date | formatDate('YYYY-MM-DD')}}</p>
+
+        <!-- 14:29:36 -->
+        <p v-pre>日期格式化：{{date | formatDate('hh:mm:ss')}}</p>
+
+        <!-- 10998 -> 10,998 -->
+        <p v-pre>金额格式化：{{price | formatPrice}}</p>
+    </div>
+    <script>
+        /**
+         * 20.过滤器filter
+                * 全局过滤：Vue.filter(name,definition)
+                * 局部过滤：filters
+            
+            * 使用：
+                * 格式：| 
+                * 场景
+                    * {{}}
+                    * v-bind
+
+            * 练习
+                * 格式化日期：YYYY-MM-DD hh:mm:ss
+                * 金额格式化：
+                    * 10998 -> 10,998
+                    * 1000998 -> 1,000,998
+         */
+
+         Vue.filter('capitalize',(value)=>{
+            return value[0].toUpperCase()+value.slice(1)
+         })
+         let vm = new Vue({
+             el:'#view',
+             data:{
+                 username:'laoxie'
+             },
+             computed:{
+                 
+             },
+             methods:{
+
+             },
+             filters:{
+                 test(value,num,a,b){console.log(value,num,a,b)
+                    return '@'+value;
+                 }
+             }
+         })
+        
+    </script>
+</body>
+</html>

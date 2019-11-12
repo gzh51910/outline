@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>22.插件</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <h1>22.插件</h1>
+    <div id="view">
+        <my-button>abc</my-button>
+    </div>
+    <script>
+        /**
+         * 22.插件
+            * 使用：Vue.use()
+         */
+
+        // 定义一个插件
+        // let myPlugin = { 
+        //     install:function(Vue){
+
+        //     }
+        // }
+        let myPlugin = function(Vue){
+            // Vue.use()后会执行这里的代码，并传递Vue
+            // 在这里，你可以定义组件、指令、过滤器、mixin
+            // 还可以把需要的数据写入Vue的原型链
+
+            Vue.filter('capitalize',function(){})
+            Vue.component('my-button',{
+                template:'<button><slot/></button>'
+            })
+            // Vue.mixin('mymixin',{})
+
+            // Vue.proptotype.$axios = axios.create({
+            //     baseURL:''
+            // })
+         }
+
+         Vue.use(myPlugin);
+
+        
+         let vm = new Vue({
+             el:'#view',
+             data:{
+                 username:'myVue'
+             },
+         })
+        
+    </script>
+</body>
+</html>
