@@ -15,6 +15,16 @@ Vue.config.productionTip = false
 // 使用ElementUI
 Vue.use(ElementUI);
 
+// 按需引入element-ui
+// import { Row, Col,Menu,MenuItem, Badge,Button} from 'element-ui';
+// Vue.component(Row.name, Row);
+// Vue.component(Col.name, Col);
+// Vue.component(Menu.name, Menu);
+// Vue.component(MenuItem.name, MenuItem);
+// Vue.component(Badge.name, Badge);
+// Vue.component(Button.name, Button);
+
+
 // 全局设置axios基础路径(所有的Axios请求都基于这个路径访问)
 // axios.defaults.baseURL = 'https://www.nanshig.com/mobile/index.php'
 Vue.prototype.$axios = axios;

@@ -14,9 +14,10 @@ import Goods from '../pages/Goods.vue';
 import List from '../pages/List.vue';
 import NotFound from '../pages/NotFound.vue';
 
+
 // 3. 实例化VueRouter并配置参数
 const router = new VueRouter({
-    // mode:'history',//hash(默认)，history
+    // mode:'history',//hash(默认)，history  （注意：history路由需要服务器的配置）
     // 配置参数
     routes: [
         // 当浏览器地址为/home时，显示Home组件的内容（显示在<router-view/>组件中）

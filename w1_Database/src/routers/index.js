@@ -8,6 +8,7 @@ let loginRouter = require('./login');
 let goodsRouter = require('./goods');
 let userRouter = require('./user');
 let regRouter = require('./reg');
+let uploadRouter = require('./upload');
 
 // 跨域解决方案CORS
 Router.use((req,res,next)=>{
@@ -38,6 +39,7 @@ Router.use('/login',loginRouter)
 Router.use('/goods',goodsRouter)
 Router.use('/user',userRouter)
 Router.use('/reg',regRouter);
+Router.use('/upload',uploadRouter);
 Router.get('/verify',(req,res)=>{
     // 获取请求头上的token
     let Authorization = req.get('Authorization');
