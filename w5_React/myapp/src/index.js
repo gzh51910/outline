@@ -30,18 +30,19 @@ ReactDOM.render(
     // )
 
     // JSX写法
-    <div id="container" className="home">
-        {
-            //<h1>Hello, {<strong>{username}</strong>}</h1>
-        }
-        <ul>
-            <li>data1</li>
-            <li>data2</li>
-        </ul>
-        <label htmlFor="username" style={myStyle}>用户名：</label>
-        <input id="username" autoFocus onKeyDown={()=>{console.log('keydown')}} />
-        <img/>
-    </div>
+    // <div id="container" className="home">
+    //     {
+    //         //<h1>Hello, {<strong>{username}</strong>}</h1>
+    //     }
+    //     <ul>
+    //         <li>data1</li>
+    //         <li>data2</li>
+    //     </ul>
+    //     <label htmlFor="username" style={myStyle}>用户名：</label>
+    //     <input id="username" autoFocus onKeyDown={()=>{console.log('keydown')}} />
+    //     <img/>
+    // </div>
+    <App/>
     , document.getElementById('root')
 );
 
