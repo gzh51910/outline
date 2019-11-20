@@ -2,8 +2,8 @@ import React from 'react';
 
 function TodoItem({idx,item,removeItem,completeItem,selectItem}){
     return (
-        <tr>
-            <td><input type="checkbox"/></td>
+        <tr onClick={selectItem.bind(null,item.id)}>
+            <td><input type="checkbox" checked={item.selected} onChange={selectItem.bind(null,item.id)}/></td>
             <td>{idx+1}</td>
             <td>{item.title}</td>
             <td>{item.done ? '是' : '否'}</td>

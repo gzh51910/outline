@@ -7,7 +7,7 @@ class TodoList extends Component {
     constructor() {
         super();
         this.state = {
-            test: ['laoxie', 'dingding', 'yueyue', 'luoluo'],
+            checkAll:false,
             datalist: [
                 {
                     id: Date.now(),
@@ -40,20 +40,22 @@ class TodoList extends Component {
         };
 
         this.setState({
-            datalist:[data,...this.state.datalist]
+            datalist: [data, ...this.state.datalist]
         })
     }
 
     //   删除
-    removeItem(id) {
-        let datalist = this.state.datalist.filter(item=>item.id!=id)
+    removeItem(id,e) {
+        let datalist = this.state.datalist.filter(item => item.id != id)
         this.setState({
             datalist
         })
+
+        e.stopPropagation();
     }
 
     //   完成
-    completeItem(id) {
+    completeItem(id,e) {
         let datalist = this.state.datalist.map(item => {
             if (item.id === id) {
                 item.done = true;
@@ -64,31 +66,47 @@ class TodoList extends Component {
         this.setState({
             datalist
         })
+
+        e.stopPropagation();
     }
 
     //  选择
-    selectItem(id) {
-        let datalist = this.state.datalist.map(item => {
-            if (item.id === id) {
-                item.selected = !item.selected;
-            }
-        });
+    selectItem(id,e) {
+        console.log('id:', id)
+        let { datalist } = this.state;
+        if (typeof id === 'boolean') {
+            datalist = datalist.map(item => {
+                item.selected = id;
+                return item;
+            });
+        } else {
+            datalist = datalist.map(item => {
+                if (item.id === id) {
+                    item.selected = !item.selected;
+                }
+                return item;
+            });
+        }
 
         this.setState({
-            datalist
-        })
+            datalist,
+            checkAll:datalist.every(item=>item.selected)
+        });
+        
+        e&&e.stopPropagation();
     }
 
     render() {
         return (
             <div>
                 <TodoForm addItem={this.addItem} />
-                <TodoContent 
-                datalist={this.state.datalist}
-                removeItem={this.removeItem}
-                completeItem={this.completeItem}
-                selectItem={this.selectItem}
-                 />
+                <TodoContent
+                    datalist={this.state.datalist}
+                    removeItem={this.removeItem}
+                    completeItem={this.completeItem}
+                    selectItem={this.selectItem}
+                    checkAll={this.state.checkAll}
+                />
             </div>
         )
     }
