@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import TodoForm from './TodoForm';
 import TodoContent from './TodoContent';
+import MyContext from './MyContext'
 
 class TodoList extends Component {
     constructor() {
@@ -97,16 +98,19 @@ class TodoList extends Component {
     }
 
     render() {
+        let {removeItem,completeItem,selectItem} = this;
         return (
             <div>
-                <TodoForm addItem={this.addItem} />
-                <TodoContent
-                    datalist={this.state.datalist}
-                    removeItem={this.removeItem}
-                    completeItem={this.completeItem}
-                    selectItem={this.selectItem}
-                    checkAll={this.state.checkAll}
-                />
+                <MyContext.Provider value={{removeItem,completeItem,selectItem}}>
+                    <TodoForm addItem={this.addItem} />
+                    <TodoContent
+                        datalist={this.state.datalist}
+                        removeItem={this.removeItem}
+                        completeItem={this.completeItem}
+                        selectItem={this.selectItem}
+                        checkAll={this.state.checkAll}
+                    />
+                </MyContext.Provider>
             </div>
         )
     }

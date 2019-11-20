@@ -92,14 +92,76 @@
             * 生命周函数
             * this
             * render()
-    * 通讯
-        * 父->子：props
-            1. 在父组件中定义子组件的属性，并传递数据
-            2. 使用
-                * 函数组件：第一个参数
-                * 类组件：this.props
-        * 子->父
-            > 利用props传递方法到子组件执行
-        * 深层次组件通讯
-            * 逐层传递
+### 知识点
+* 通讯
+    * 父->子：props
+        1. 在父组件中定义子组件的属性，并传递数据
+        2. 使用
+            * 函数组件：第一个参数
+            * 类组件：this.props
+    * 子->父
+        > 利用props传递方法到子组件执行
+    * 深层次组件通讯
+        * 逐层传递
+        * context
+            1. 定义Context：`let MyContext = React.createContext()`
+            2. 父组件往context中写入共享数据
+                ```js
+                    <MyContext.Provider value={data}></MyContext.Provider>
+                ```
+            3. 子组件使用context
+                * 类组件
+                    ```js
+                        SubComponent.contextType = MyContext
+                        this.context
+                    ```
+                * 函数组件
+                    ```js
+                        <MyContext.Consumer>
+                            {
+                                context=>{
+                                    // context中包含所有共享的数据
+                                }
+                            }
+                        <MyContext.Consumer>
+                    ```
 
+* 生命周期（类组件）
+    * 阶段
+        * Initial：初始化阶段
+            * constructor
+        * Mounting：已插入真实 DOM
+            * componentWillMount（不推荐）
+            * componentDidMount
+        * Updating：正在被重新渲染
+            * componentWillUpdate（不推荐）
+            * componentDidUpdate
+            > 组件在什么情况下会被刷新：1.props更新，2.state更新
+        * Unmounting：已移出真实 DOM
+            * componentWillUnmount
+    * 特殊生命周期函数
+        * componentWillReceiveProps（不推荐）
+        * shouldComponentUpdate
+
+* 手动搭建React环境
+    * react&react-dom
+    * babel
+        * 
+    * webpack
+        * 项目构建工具
+            * grunt -> 
+            * gulp -> 
+                > 基于任务的构建工具，任何的操作都需要手动编写代码来实现
+            * webpack
+                > 基于配置的构建工具，用户只需要关注配置文件即可
+            ```js
+                gulp.task('compileJS',()=>{
+                    gulp.src('src/js/xxx.js')
+                    .pipe(uglify())
+                    .pipe(rename())
+                    .pipe(gulp.dest('./dist'))
+                })
+            ```
+        * 配置文件：webapck.config.js
+
+        

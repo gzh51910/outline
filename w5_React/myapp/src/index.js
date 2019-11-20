@@ -8,8 +8,8 @@ import * as serviceWorker from './serviceWorker';
 // let res2 = <div id="container">text</div>
 // console.log('res:',res,res2)
 
-let username = 'laoxie';
-let myStyle = {color:'#f00',fontSize:20}
+// let username = 'laoxie';
+// let myStyle = {color:'#f00',fontSize:20}
 
 // 渲染方法render(content,target)
 ReactDOM.render(
