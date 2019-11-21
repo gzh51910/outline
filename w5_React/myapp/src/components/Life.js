@@ -34,6 +34,8 @@ class Life extends React.Component{
     componentWillReceiveProps(nextProps){
         console.log('componentWillReceiveProps',nextProps)
     }
+
+    // 一般用于性能优化
     shouldComponentUpdate(nextProps, nextState){
         console.log('shouldComponentUpdate',nextProps, nextState);
         // 必须显性返回true/false，如果不写该生命周函数，默认为 return true

@@ -164,4 +164,72 @@
             ```
         * 配置文件：webapck.config.js
 
-        
+
+## day5-4
+
+### 复习
+* 深层次组件
+    * 逐层传递
+    * context
+        1. 创建context: `let MyContext = React.createContext(defaultValue)`
+        2. 父组件定义共享的数据
+            ```js
+                <MyContext.Provider value={data}>
+                    // children
+                </MyContext.Provider>
+        3. 子组件获取数据
+            * contextType（只适用于类组件）
+            ```js
+                // 定义静态属性contextType
+                SubComponent.contextType = MyContext
+                this.context.data
+            ```
+            * Consumer
+            ```js
+                <MyContext.Consumer>
+                    {
+                        context=>{
+                            return 
+                        }
+                    }
+                </MyContent.Consumer>
+            ```
+* 生命周期函数
+    * 初始化阶段
+        * constructor
+    * 挂载阶段
+        * componentDidMount
+            > ajax
+    * 更新阶段
+        * componentDidUpdate
+            > 在此慎重修改state，避免死循环
+    * 销毁阶段
+        * componentWillUnmount
+    * 特殊生命周期
+        * shouldComponentUpdate
+            * 性能优化
+* 什么情况下会刷新组件
+    * state改变
+    * props改变
+    * 强制刷新:this.forceUpdate()
+
+* Webpack
+    * webpack的工作原理
+        * 从入口开始，逐层分析项目下的所有模块与依赖（包含第三方模块、图片、css等等），进项编译处理，并把它们打包成一个或多个文件
+    * 手动搭建React环境
+        * react&react-dom
+        * babel-loader&@bable/core&@babel/preset-react
+        * webpack&webpack-cli&webpack-dev-server
+    * 配置webpack.config.js
+        > commonJS规范的模块
+        * entry 入口
+        * output 出口
+        * loader 加载器(module.rules)
+            * babel-loader
+        * plugin 插件
+            * html-webpack-plugin
+        * devServer 测试服务器
+            * contentBase
+        * mode(使用测试服务器时为development，编译时模式为production)
+            * production    生产环境
+            * development   开发环境

@@ -1,10 +1,19 @@
 import React from 'react';
 
-// import TodoList from './TodoList';
+import Home from './pages/Home';
+import './App.scss';
+
+const Styles = {
+    container:{
+        color:'#f00'
+    }
+}
+
 function App(){
     return (
-        <div>
-            App
+        <div className="container">
+            APP
+            <Home/>
         </div>
     )
 }
