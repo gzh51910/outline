@@ -13,9 +13,18 @@ module.exports = {
                 test:/\.jsx?$/,
                 use:[{
                     loader:'babel-loader',
-                    options:{
-                        presets:['@babel/preset-react']
-                    }
+                    // options:{
+                    //     presets:['@babel/preset-react'],
+                    //     plugins:[
+                    //         ['@babel/proposal-decorators',{legacy: true}],
+                    //         ['@babel/proposal-class-properties',{loose: true}],
+                                // ["import",{
+                                //     "libraryName": "antd",
+                                //     "libraryDirectory": "es",
+                                //     "style": "css" // `style: true` 会加载 less 文件
+                                // }]
+                    //     ]
+                    // }
                 }],
                 include:path.join(__dirname,'./src')
             },
@@ -24,7 +33,7 @@ module.exports = {
             {
                 test:/\.css$/,
                 use:['style-loader','css-loader'],
-                include:path.join(__dirname,'./src')
+                // include:path.join(__dirname,'./src')
             },
 
             // sass加载器

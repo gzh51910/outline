@@ -233,3 +233,79 @@
         * mode(使用测试服务器时为development，编译时模式为production)
             * production    生产环境
             * development   开发环境
+
+### 知识点
+* ReactRouter4
+    > 万物皆组件
+    * 内置组件
+        * 路由类型
+            * `<HashRouter/>`
+            * `<BrowserRouter/>`
+        * 路由展示
+            * `<Route/>`
+            * `<Redirect/>`
+        * 路由匹配
+            * `<Switch/>`
+    * 导航
+        * 声明式导航
+            * `<Link/>`
+            * `<NavLink/>`
+        * 编程式导航
+            > 利用js来实现页面跳转
+            * 跳转方式
+                * history.push()
+                * history.replace()
+            * 获取history对象
+                * 通过`<Route>`渲染组件,history会自动写入props
+                * 通过`withRouter`高阶组件，history会自动写入props
+
+* 高阶组件HOC（High Order Component）
+    > 严格意义上来说，高阶组件不是一个React组件，而是一个包装函数（纯函数），它返回一个组件
+    * 编写高阶组件注意事项
+        * 必须返回一个组件
+        * 必须给被包装的组件传递props
+    * 设计模式中的`装饰器模式`
+
+
+## day5-5
+
+### 复习
+* 路由ReactRouter4
+    * 内置组件
+        * 路由类型
+            * HashRouter
+            * BrowserRouter
+        * 渲染
+            * Route
+                * path
+                * component
+                * exact
+                * render
+            * Redirect
+                * from
+                * to
+                * exact
+            * Switch
+                > 匹配单个路由
+        * 跳转
+            * Link
+            * NavLink
+                * to        跳转到哪里
+                * replace   是否保留浏览记录
+                * activeStyle
+                * activeClassName
+    * 导航
+        * 声明式导航
+        * 编程式导航
+            * 常用对象
+                * history   跳转
+                    * push()
+                    * replace()
+                * location  当前路由信息
+                * match
+            * 如何获取
+                * 利用`<Route>`渲染组件
+                * 利用高阶组件`withRouter`包装
+* 高阶组件
+    > 高阶组件是一个包装函数（装饰器模式）
+    * ES7写法：`@高阶组件`
