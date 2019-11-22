@@ -2,13 +2,20 @@ import React,{Component} from 'react';
 
 import {Route,Redirect,Switch,Link,NavLink,withRouter} from 'react-router-dom';
 
-import Home from './pages/Home';
-import Discover from './pages/List';
-import Cart from './pages/Cart';
-import Reg from './pages/Reg';
-import Login from './pages/Login';
-import Mine from './pages/Mine';
-import Goods from './pages/Goods';
+// import Home from './pages/Home';
+// import Discover from './pages/List';
+// import Cart from './pages/Cart';
+// import Reg from './pages/Reg';
+// import Login from './pages/Login';
+// import Mine from './pages/Mine';
+// import Goods from './pages/Goods';
+import Home from '~/Home';
+import Discover from '~/List';
+import Cart from '~/Cart';
+import Reg from '~/Reg';
+import Login from '~/Login';
+import Mine from '~/Mine';
+import Goods from '~/Goods';
 
 // 完整引入
 // import {Menu, Icon} from 'antd';

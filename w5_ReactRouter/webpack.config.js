@@ -6,6 +6,14 @@ module.exports = {
         contentBase:path.join(__dirname,'./public'),
         port:8000
     },
+    resolve:{
+        // 别名
+        alias:{
+            '@':path.join(__dirname,'./src'),
+            '@@':path.join(__dirname,'./src/components'),
+            '~':path.join(__dirname,'./src/pages')
+        }
+    },
     module:{
         rules:[
             // js加载器
