@@ -60,7 +60,10 @@ class App extends Component{
         this.goto = this.goto.bind(this);
     }
 
+<<<<<<< HEAD
     // 添加原型方法
+=======
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
     goto(path){
         let {history} = this.props;
        console.log(this.props);
@@ -68,34 +71,51 @@ class App extends Component{
        history.push(path)
     } */
 
+<<<<<<< HEAD
     // 添加实例属性/方法
     state = {
         currentPath:'/home',
+=======
+    state = {
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
         menu:[
             {
                 name:'home',
                 path:'/home',
+<<<<<<< HEAD
                 icon:'home',
+=======
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                 text:'首页'
             },{
                 name:'discover',
                 path:'/discover',
+<<<<<<< HEAD
                 icon:'compass',
+=======
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                 text:'发现'
             },
             {
                 name:'cart',
                 path:'/cart',
+<<<<<<< HEAD
                 icon:'shopping-cart',
+=======
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                 text:'购物车'
             },{
                 name:'mine',
                 path:'/mine',
+<<<<<<< HEAD
                 icon:'user',
+=======
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                 text:'我的'
             },
         ]
     }
+<<<<<<< HEAD
     goto = ({key:path})=>{
         let {history} = this.props;
         this.setState({
@@ -109,10 +129,19 @@ class App extends Component{
             currentPath:this.props.location.pathname
         })
     }
+=======
+    goto = (path)=>{
+        let {history} = this.props;
+       console.log(this.props);
+
+       history.push(path)
+    }
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
     render(){
         console.log(this)
         return (
             <div>
+<<<<<<< HEAD
                 {/* <ul>
                 {
                     this.state.menu.map(item=>{
@@ -122,10 +151,22 @@ class App extends Component{
                             activeStyle={{color:'#f00',fontWeight:'bold'}}
                             replace
                             >{item.text}</NavLink>
+=======
+                <ul>
+                {
+                    this.state.menu.map(item=>{
+                        return <li key={item.name} onClick={this.goto.bind(this,item.path)}>
+                            {/* <NavLink 
+                            to={item.path}
+                            activeStyle={{color:'#f00',fontWeight:'bold'}}
+                            replace
+                            >{item.text}</NavLink> */}
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                             {item.text}
                         </li>
                     })
                 }
+<<<<<<< HEAD
                 </ul> */}
 
                 <Menu 
@@ -143,6 +184,10 @@ class App extends Component{
                     })
                 }
                 </Menu>
+=======
+                </ul>
+                
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                     <Switch>
                         {/* <Route path="/" component={Home} exact/> */}
                         <Route path="/home" component={Home}/>

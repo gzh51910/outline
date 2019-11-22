@@ -24,6 +24,7 @@ module.exports = {
                     // options:{
                     //     presets:['@babel/preset-react'],
                     //     plugins:[
+<<<<<<< HEAD
                     //         ['@babel/proposal-decorators',{legacy: true}],
                     //         ['@babel/proposal-class-properties',{loose: true}],
                                 // ["import",{
@@ -31,6 +32,10 @@ module.exports = {
                                 //     "libraryDirectory": "es",
                                 //     "style": "css" // `style: true` 会加载 less 文件
                                 // }]
+=======
+                    //         ['@babel/plugin-proposal-decorators',{legacy: true}],
+                    //         ['@babel/plugin-proposal-class-properties',{loose: true}],
+>>>>>>> 78d95a06972ddb0fe3166f5b04c71d9b0418414b
                     //     ]
                     // }
                 }],

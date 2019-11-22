@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-
 import {nsg} from '@/api';
 import { Carousel } from 'antd';
 import Goodslist from '@@/Goodslist';
@@ -33,7 +32,8 @@ class Home extends Component{
                     }
                 </Carousel>
 
-                <Goodslist data={}/>
+                {/* <Goodslist data={}/> */}
+
             </div>
         )
     }
