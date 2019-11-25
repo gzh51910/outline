@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { Route, Redirect, Switch, Link, NavLink, withRouter } from 'react-router-dom';
+import './App.scss';
 
 // import Home from './pages/Home';
 // import Discover from './pages/List';
@@ -16,6 +17,7 @@ import Reg from '~/Reg';
 import Login from '~/Login';
 import Mine from '~/Mine';
 import Goods from '~/Goods';
+
 
 // 完整引入
 // import {Menu, Icon} from 'antd';
