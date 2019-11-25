@@ -19,7 +19,7 @@ class Goods extends Component {
         commedList:[]
     }
     getData = async (goods_id) => {
-        let { data:{datas} } = await nsg.get({
+        let {datas} = await nsg.get({
             act: 'goods',
             op: 'goods_detail',
             goods_id,
@@ -53,13 +53,21 @@ class Goods extends Component {
             this.getData(this.props.match.params.id)
         }
     }
-    render() {
+    render() {console.log('goods：',this.props)
         let {data,commedList} = this.state;
         return (
             <div>
                 <div className="img-container">
                     <img src={data.goods_image} />
                     <Icon type="heart" style={{ fontSize: 30, color: '#f00' }} />
+
+                    <Icon 
+                    className="btnBack" 
+                    type="arrow-left" 
+                    style={{ fontSize: 30, color: '#f00' }}
+                    onClick={()=>{
+                        this.props.history.goBack();
+                    }} />
                 </div>
                 <div style={Styles.pd}>
                     <h1>{data.goods_name}</h1>

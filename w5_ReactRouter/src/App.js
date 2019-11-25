@@ -11,7 +11,7 @@ import './App.scss';
 // import Mine from './pages/Mine';
 // import Goods from './pages/Goods';
 import Home from '~/Home';
-import Discover from '~/List';
+import Discover from '~/Discover';
 import Cart from '~/Cart';
 import Reg from '~/Reg';
 import Login from '~/Login';

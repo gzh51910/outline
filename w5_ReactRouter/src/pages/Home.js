@@ -18,17 +18,15 @@ class Home extends Component{
     }
 
     async componentDidMount(){
-        let {data} = await nsg.get({
+        let {datas} = await nsg.get({
             act:'index'
         });
-
-        console.log(data);
         // 轮播图数据
-        let recommed = data.datas[0].adv_list.item;
+        let recommed = datas[0].adv_list.item;
 
         // 格式化数据
         // [{title,item},{}]
-        let datalist = data.datas.slice(1).map(item=>item.goods);
+        let datalist = datas.slice(1).map(item=>item.goods);
         console.log('datalist:',datalist)
 
         this.setState({

@@ -6,11 +6,13 @@ const nsg = axios.create({
 });
 
 // 二次封装(简化操作,维护方便)
-function get(params,config={}){
-  return nsg.get('',{
+async function get(params,config={}){
+  let {data} = await nsg.get('',{
     ...config,
     params
-  })
+  });
+
+  return data;
 }
 
 function post(data,config={}){
