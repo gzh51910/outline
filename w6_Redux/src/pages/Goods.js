@@ -13,6 +13,7 @@ import './Goods.scss';
 // console.log('state.init:',store.getState())
 
 import {connect} from 'react-redux'
+import CartAction from '../store/action'
 
 let Styles = {
     mt:{
@@ -22,8 +23,10 @@ let Styles = {
         padding:15
     }
 }
-
-@connect()
+const mapStateToProps = state=>({
+    goodslist:state.goodslist
+})
+@connect(mapStateToProps)
 class Goods extends Component {
     state = {
         data: {},
@@ -49,21 +52,41 @@ class Goods extends Component {
     goto = (id)=>{
         this.props.history.push(`/goods/${id}`);
     }
+    buyNow = ()=>{
+        this.add2cart();
+        this.props.history.push('/cart');
+    }
     add2cart = ()=>{
+        let {goodslist} = this.props;
         let {goods_id,
             goods_name,
             goods_image,
             goods_price} = this.state.data
-        let goods = {
-            goods_id,
-            goods_name,
-            goods_image,
-            goods_price,
-            goods_qty:1
+
+        // 判断当前商品是否已经存在购物车中
+        let currentGoods = goodslist.filter(item=>item.goods_id===goods_id)[0]
+        if(currentGoods){
+            // this.props.dispatch({
+            //     type:'change_goods_qty',
+            //     payload:{goods_id,goods_qty:currentGoods.goods_qty+1}
+            // })
+
+            this.props.dispatch(CartAction.changeQty(goods_id,currentGoods.goods_qty+1))
+        }else{
+
+            let goods = {
+                goods_id,
+                goods_name,
+                goods_image,
+                goods_price,
+                goods_qty:1
+            }
+            // console.log('goods:',goods)
+            // store.dispatch({type:'add_to_cart',payload:goods})
+            // this.props.dispatch({type:'add_to_cart',payload:goods})
+            this.props.dispatch(CartAction.add(goods))
         }
-        // console.log('goods:',goods)
-        // store.dispatch({type:'add_to_cart',payload:goods})
-        this.props.dispatch({type:'add_to_cart',payload:goods})
+
 
     }
     componentDidMount() {
@@ -105,7 +128,7 @@ class Goods extends Component {
                     </p>
                     <Button.Group>
                         <Button icon="shopping-cart" size="large" onClick={this.add2cart}>添加到购物车</Button>
-                        <Button icon="shopping" type="danger" size="large">立即购买</Button>
+                        <Button icon="shopping" type="danger" size="large" onClick={this.buyNow}>立即购买</Button>
                     </Button.Group>
                 </div>
                 {/* 推荐列表 */}

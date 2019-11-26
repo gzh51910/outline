@@ -1,39 +1,47 @@
 import React,{Component} from 'react';
 import {Row,Col,List,Divider,Tooltip,Button,Icon,InputNumber,Steps  } from 'antd';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import CartAction from '../store/action'
 
+// 映射属性（获取）
+const mapStateToProps = (state)=>{
+    let {goodslist} = state;
+    let totalPrice = goodslist.reduce((prev,item)=>prev+item.goods_price*item.goods_qty,0)
+    return {
+        goodslist,
+        totalPrice
+    }
+}
+
+// 映射方法（修改操作）
+const mapDispatchToProps = (dispatch)=>{
+    // return {
+    //     clear(){
+    //         dispatch({type:'CLEAR_CART'})
+    //     },
+    //     changeQty(goods_id,goods_qty){
+    //         dispatch({type:'CHANGE_GOODS_QTY',payload:{goods_id,goods_qty}})
+    //     },
+    //     remove(goods_id){
+    //         dispatch({type:'REMOVE_FROM_CART',payload:{goods_id}})
+    //     },
+    //     dispatch
+    // }
+    return bindActionCreators(CartAction,dispatch)
+}
+@connect(mapStateToProps,mapDispatchToProps) // 两个参数可选，其中mapDispatchToProps默认已经映射dispatch到组件的props
 class Cart extends Component{
-    state = {
-        goodslist: [{
-            goods_id: "1",
-            goods_name: "huawei mate30 pro",
-            goods_image:
-                "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3089410232,3830777459&fm=11&gp=0.jpg",
-            goods_price: 5998,
-            goods_qty: 10
-        },
-        {
-            goods_id: "2",
-            goods_name: "xiaomi9",
-            goods_image:
-                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571131475&di=2df2d3a54a89db9e09952799acb25261&imgtype=jpg&er=1&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2F8488db95efa140b9c50cb4615e2ca337a6981aa7.jpg",
-            goods_price: 2999,
-            goods_qty: 2
-        },
-        {
-            goods_id: "3",
-            goods_name: "onePlus9 pro",
-            goods_image:
-                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1570536784660&di=d4471f6edf73cace7d98fb05869a9277&imgtype=0&src=http%3A%2F%2Fimg13.360buyimg.com%2Fn1%2Fs450x450_jfs%2Ft28117%2F273%2F1288839750%2F66834%2F8ef15c40%2F5cdd22b8Nbc711aba.jpg",
-            goods_price: 3999,
-            goods_qty: 1
-        }]
-    }
-    changeQty = ()=>{
-
-    }
+    // state = {
+    //     goodslist: []
+    // }
+    // changeQty = (goods_id,goods_qty)=>{
+    //     let {dispatch} = this.props;
+    //     dispatch({type:'change_goods_qty',payload:{goods_id,goods_qty}})
+    // }
     render(){
-        let {goodslist} = this.state;
-        let totalPrice = goodslist.reduce((prev,item)=>prev+item.goods_price*item.goods_qty,0)
+        let {goodslist,totalPrice,dispatch,clear,changeQty,remove} = this.props;
+        console.log(this.props)
         return (
             <div style={{padding:15}}>
                 <Steps size="small" current={1}>
@@ -49,7 +57,7 @@ class Cart extends Component{
                         <List.Item
                             actions={[
                                 <Tooltip title="删除商品">
-                                    <Icon type="close" style={{color:'#f00'}}/>
+                                    <Icon type="close" style={{color:'#f00'}} onClick={remove.bind(this,item.goods_id)}/>
                                 </Tooltip>]}
                             >
                             <List.Item.Meta
@@ -63,7 +71,7 @@ class Cart extends Component{
                                     min={1} 
                                     max={10} 
                                     value={item.goods_qty} 
-                                    onChange={this.changeQty.bind(this,item.id)}
+                                    onChange={changeQty.bind(this,item.goods_id)}
                                      />
                                 </div>}
                             />
@@ -73,7 +81,7 @@ class Cart extends Component{
                 <Divider />
                 <Row>
                     <Col span={8}>
-                        <Button type="danger" icon="delete">清空购物车</Button>
+                        <Button type="danger" icon="delete" onClick={clear}>清空购物车</Button>
                     </Col>
                     <Col span={16} style={{textAlign:'right'}}>
                     总价：<span className="price" style={{marginRight:20}}><span>{totalPrice.toFixed(2)}</span></span><Button type="primary" size="large">结算</Button>
