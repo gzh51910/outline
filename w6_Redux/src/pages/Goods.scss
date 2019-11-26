@@ -1,0 +1,7 @@
+.img-container{
+    position: relative;
+    img{width:100%;}
+    .anticon-heart{position:absolute;top:10px;right:10px;}
+    .btnBack{position: absolute;left:10px;top:10px;}
+    .btnBack:hover{background-Color:rgba(0,0,0,.3)}
+}
