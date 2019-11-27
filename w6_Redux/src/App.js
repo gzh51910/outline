@@ -205,7 +205,7 @@ const mapStateToProps = function(state){
     // 映射state数据到App组件的props
     console.log('state:',state)
     return {
-        cartLen:state.goodslist.length
+        cartLen:state.cart.goodslist.length
     };
 }
 

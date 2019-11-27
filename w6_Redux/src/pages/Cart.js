@@ -2,11 +2,11 @@ import React,{Component} from 'react';
 import {Row,Col,List,Divider,Tooltip,Button,Icon,InputNumber,Steps  } from 'antd';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import CartAction from '../store/action'
+import CartAction from '../store/action/cart'
 
 // 映射属性（获取）
 const mapStateToProps = (state)=>{
-    let {goodslist} = state;
+    let {goodslist} = state.cart;
     let totalPrice = goodslist.reduce((prev,item)=>prev+item.goods_price*item.goods_qty,0)
     return {
         goodslist,

@@ -13,7 +13,7 @@ import './Goods.scss';
 // console.log('state.init:',store.getState())
 
 import {connect} from 'react-redux'
-import CartAction from '../store/action'
+import CartAction from '../store/action/cart'
 
 let Styles = {
     mt:{
@@ -24,7 +24,7 @@ let Styles = {
     }
 }
 const mapStateToProps = state=>({
-    goodslist:state.goodslist
+    goodslist:state.cart.goodslist
 })
 @connect(mapStateToProps)
 class Goods extends Component {

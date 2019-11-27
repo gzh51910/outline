@@ -105,3 +105,68 @@
         //<div>{content}</div>
         <div dangerouslySetInnerHTML={{__html:content}}></div>
     ```
+
+## day6-3
+
+### 复习
+* Redux：解决组件间数据共享的问题
+    * 核心
+        * Store     仓库（创建：createStore()）
+            * 获取：store.getState()
+            * 修改：store.dispatch(action)
+            * 监听：store.subscribe(fn)
+        * State     状态（数据）
+        * Action    命令
+        * Reducer   修改state的逻辑
+            * 是一个纯函数，state,action作为参数
+            * 返回新的state
+    * store的工作原理
+    ```js
+        function createStore(reducer){
+            let state = {}
+
+            let listener = [];
+
+            let getState = ()=>{
+                return state;
+            }
+            let dispatch = (action)=>{
+                state = reducer(state,action);
+
+                listener.forEach(callback=>{
+                    callback(getState());
+                })
+            }
+
+            let subscribe = (callback)=>{
+                listener.push(callback)
+            }
+
+            return {
+                getState,
+                dispatch,
+                subscribe
+            }
+        }
+
+
+        let store = createStore();
+        let state = store.getState();
+        //state.goodslist.push();// typescript是js的扩展
+        //store.subscribe((state)=>{console.log(666)})
+        //store.subscribe((state)=>{console.log(777)})
+        //store.subscribe((state)=>{console.log(888)})
+        //store.subscribe((state)=>{console.log(999)})
+        //store.dispath();
+
+    ```
+* react-redux：连接React组件与Redux数据
+    > 利用context+高阶组件实现react组件与redux数据的连接
+    * Provider
+        * 用法：`<Provider store={store}>`
+    * connect
+        * 用法：`connect(mapStateToProps,mapDispatchToProps)(Component)`    函数柯里化
+
+* Action Creator 
+    > 用于创建Action的函数
+    * bindActionCreators(actionCreator,dispatch)

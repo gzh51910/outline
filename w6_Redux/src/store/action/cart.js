@@ -33,6 +33,7 @@ function remove(goods_id){
     }
  }
 
+//  default导出，方便使用bindActionCreators
  export default {
     add,
     changeQty,
