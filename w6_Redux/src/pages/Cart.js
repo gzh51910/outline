@@ -16,19 +16,19 @@ const mapStateToProps = (state)=>{
 
 // 映射方法（修改操作）
 const mapDispatchToProps = (dispatch)=>{
-    // return {
-    //     clear(){
-    //         dispatch({type:'CLEAR_CART'})
-    //     },
-    //     changeQty(goods_id,goods_qty){
-    //         dispatch({type:'CHANGE_GOODS_QTY',payload:{goods_id,goods_qty}})
-    //     },
-    //     remove(goods_id){
-    //         dispatch({type:'REMOVE_FROM_CART',payload:{goods_id}})
-    //     },
-    //     dispatch
-    // }
-    return bindActionCreators(CartAction,dispatch)
+    return {
+        clear(){
+            dispatch({type:'CLEAR_CART'})
+        },
+        changeQty(goods_id,goods_qty){
+            dispatch({type:'CHANGE_GOODS_QTY',payload:{goods_id,goods_qty}})
+        },
+        remove(goods_id){
+            dispatch({type:'REMOVE_FROM_CART',payload:{goods_id}})
+        },
+        dispatch
+    }
+    // return bindActionCreators(CartAction,dispatch)
 }
 @connect(mapStateToProps,mapDispatchToProps) // 两个参数可选，其中mapDispatchToProps默认已经映射dispatch到组件的props
 class Cart extends Component{

@@ -170,3 +170,33 @@
 * Action Creator 
     > 用于创建Action的函数
     * bindActionCreators(actionCreator,dispatch)
+
+### 知识点
+* reducer模块化
+    * combineReducers：合并多个reducer
+* react与redux调试
+* 中间件
+    * redux-saga
+        * Generator     生成器
+            * return    结束并返回值
+            * yield     暂停并返回值
+            * 返回一个迭代器
+        * Iterator      迭代器
+            * `for..of` 能遍历具有迭代器的数据
+            * next()
+                > 返回数据格式为：{value,done}
+    
+    ```js
+        // 普通函数
+        function show(){
+            return 100
+        }
+
+        show();//100
+
+        // 生成器函数
+        // 返回一个迭代器
+        function* show(){
+
+        }
+    ```
