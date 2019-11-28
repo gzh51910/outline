@@ -14,6 +14,7 @@ function* HelloSaga(){
 
 }
 
+// 获取商品库存信息
 function* getInventory({payload}){
     // 发起ajax请求，请求商品库存
     // const {data} = yield my.get('/goods/inventory',{id:10086})
