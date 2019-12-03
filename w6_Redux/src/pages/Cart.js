@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch)=>{
             dispatch({type:'CLEAR_CART'})
         },
         changeQty(goods_id,goods_qty){
-            dispatch({type:'CHANGE_GOODS_QTY',payload:{goods_id,goods_qty}})
+            // dispatch({type:'CHANGE_GOODS_QTY',payload:{goods_id,goods_qty}})
+            dispatch({type:'CHANGE_GOODS_QTY_ASYNC',payload:{goods_id,goods_qty}})
         },
         remove(goods_id){
             dispatch({type:'REMOVE_FROM_CART',payload:{goods_id}})

@@ -49,6 +49,20 @@ module.exports = {
                 test:/\.scss$/,
                 use:['style-loader','css-loader','sass-loader'],
                 include:path.join(__dirname,'./src')
+            },
+
+            // 图片
+            {
+                test: /\.(png|jpe?g|gif|svg)$/,
+                loader: 'url-loader',
+                options: {
+                //小于10k的图片使用base64编码显示
+                  limit: 10000,
+
+                  //大于10k的图片以一定的规则存入以下目录
+                  //   存放目录基于output的地址
+                  name: 'img/[name].[hash:5].[ext]' 
+                }
             }
         ]
     },

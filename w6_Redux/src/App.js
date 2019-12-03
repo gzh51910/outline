@@ -35,6 +35,11 @@ import { Menu, Icon,Badge } from 'antd';
 // import store from './store';
 import {connect} from 'react-redux';
 
+// import myimg from './img/4eddb55b6e7043df98c844dc7bf8a65f.jpg'
+// let img = require("./img/4eddb55b6e7043df98c844dc7bf8a65f.jpg");
+// console.log('img:',img)
+// console.log('myimg:',myimg)
+
 class App extends Component {
     /* constructor(props){
         super(props)
@@ -77,6 +82,7 @@ class App extends Component {
     state = {
         currentPath: '/home',
         // cartLen:0,
+        imgurl:'4eddb55b6e7043df98c844dc7bf8a65f.jpg',
         menu: [
             {
                 name: 'home',
@@ -129,10 +135,15 @@ class App extends Component {
         })
     }
     render() {
+        let {imgurl} = this.state;
         let {cartLen} = this.props;
         console.log('App.props:',this.props)
         return (
             <div>
+                {/* 不经过Webpack处理 */}
+               {/* <img src={require('./img/4eddb55b6e7043df98c844dc7bf8a65f.jpg').default}/> */}
+               <img src={require('./img/'+imgurl).default}/>
+               <img src={require('./img/btn-login.png').default}/>
                 {/* <ul>
                 {
                     this.state.menu.map(item=>{
