@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			body{margin:0;}
+			img,video{width:100%;}
+		</style>
+	</head>
+	
+	<body>
+		<h1>摄像头操作</h1>
+		<button type="button" class="mui-btn mui-btn-outlined" onclick="captureImage()">拍照</button>
+		<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" onclick="getVideo()">录像</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			
+			document.addEventListener( "plusready", ()=>{
+				// 获取摄像头对象
+				let cmr = window.plus.camera.getCamera(1);
+				window.getVideo = function(){
+					cmr.startVideoCapture((path)=>{
+						//转成平台绝对地址
+						let realPath = plus.io.convertLocalFileSystemURL(path);
+						
+						let video = document.createElement('video');
+						video.src = realPath;
+						video.controls = true;
+						video.autoplay = true;
+						document.body.appendChild(video);
+						
+						// 保存到相册
+						// plus.gallery.save(path,()=>{
+						// 	// alert('保存成功')
+						// 	plus.nativeUI.toast('保存成功');
+						// });
+					})
+				}
+				window.captureImage = function(){
+					cmr.captureImage((path)=>{
+						//转成平台绝对地址
+						let realPath = plus.io.convertLocalFileSystemURL(path)
+						console.log(path,realPath);
+						
+						// 写入页面
+						let img = new Image();
+						img.src = realPath;
+						document.body.appendChild(img)
+						
+						
+						// 保存到相册
+						plus.gallery.save(path,()=>{
+							// alert('保存成功')
+							plus.nativeUI.toast('保存成功');
+						});
+					},(err)=>{
+						console.log(err)
+					},{
+						//配置参数
+						resolution:cmr.supportedImageResolutions[1]
+					})
+				}
+				
+				console.log(cmr)
+			}, false );
+			
+			
+		</script>
+	</body>
+
+</html>
