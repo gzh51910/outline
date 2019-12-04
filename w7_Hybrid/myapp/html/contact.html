@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			body,html{margin:0;height:100%;width:100%;}
+			#bdmap{height:100%;width:100%;}
+		</style>
+	</head>
+	
+	<body>
+		<h1>通讯录1</h1>
+		<ul id="contactList"></ul>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			let contactList = document.querySelector('#contactList')
+			mui.init()
+			mui.plusReady(function () {
+				// 设备信息
+				let {model} = plus.device
+				console.log('设备信息：',model);
+				
+				let times = 1;
+				let timer = setInterval(()=>{
+					times++;
+					plus.device.vibrate(1000)
+					if(times>=5){
+						clearInterval(timer)
+					}
+				},2000)
+				let {getAddressBook,ADDRESSBOOK_PHONE} = plus.contacts
+			    getAddressBook( ADDRESSBOOK_PHONE, (addressbook)=>{
+					console.log(addressbook);
+					
+					addressbook.find( ["displayName","phoneNumbers"], (result)=>{
+						console.log('result:',result)
+						contactList.innerHTML = result.map(item=>{
+							//return `<li><strong>${item.displayName}</strong>：
+							//	${item.phoneNumbers.map(item=>`<a href="tel:${item.value}">${item.value}</a>`)}
+							//</li>`
+							return `<li><strong>${item.displayName}</strong>：
+								${item.phoneNumbers.map(item=>`<span class="telnumber">${item.value}</span>`)}
+							</li>`
+						}).join('')+'<li><span class="telnumber">110</span></li>'
+					})
+				} );
+				
+				// 拨打电话
+				contactList.onclick = (e)=>{
+					if(e.target.className === 'telnumber'){
+						let number = e.target.innerText;
+						plus.device.dial(number,false)
+					}
+				}
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

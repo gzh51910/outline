@@ -24,41 +24,58 @@
 			
 			document.addEventListener( "plusready", ()=>{console.log('plusready')
 				// 获取当前位置经纬度
+				// h5+接口
 				plus.geolocation.getCurrentPosition((position)=>{
 					console.log(position)
-					let {coords} = position;
-					
-					// 创建Map实例
-					var map = new BMap.Map("bdmap");
-					// 创建地图实例  
-					var point = new BMap.Point(coords.longitude, coords.latitude);
-					// 创建点坐标  
-					// map.centerAndZoom('广州', 15);
-					
-					map.centerAndZoom(point, 19);
-					
-					// 定位标注
-					var marker = new BMap.Marker(point);  // 创建标注
-					map.addOverlay(marker);               // 将标注添加到地图中
-					marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-					
-					// 运行鼠标滚轮放大缩小
-					map.enableScrollWheelZoom(true);
-					
-					// 全景地图
-					// 覆盖区域图层测试
-					map.addTileLayer(new BMap.PanoramaCoverageLayer());
-
-					var stCtrl = new BMap.PanoramaControl(); //构造全景控件
-					stCtrl.setOffset(new BMap.Size(20, 20));
-					map.addControl(stCtrl);//添加全景控件
+// 					let {coords} = position;
+// 					
+// 					// 创建Map实例
+// 					var map = new BMap.Map("bdmap");
+// 					// 创建地图实例  
+// 					var point = new BMap.Point(coords.longitude, coords.latitude);
+// 					// 创建点坐标  
+// 					// map.centerAndZoom('广州', 15);
+// 					
+// 					map.centerAndZoom(point, 19);
+// 					
+// 					// 定位标注
+// 					var marker = new BMap.Marker(point);  // 创建标注
+// 					map.addOverlay(marker);               // 将标注添加到地图中
+// 					marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+// 					
+// 					// 运行鼠标滚轮放大缩小
+// 					map.enableScrollWheelZoom(true);
+// 					
+// 					// 全景地图
+// 					// 覆盖区域图层测试
+// 					map.addTileLayer(new BMap.PanoramaCoverageLayer());
+// 
+// 					var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+// 					stCtrl.setOffset(new BMap.Size(20, 20));
+// 					map.addControl(stCtrl);//添加全景控件
 				},(error)=>{
 					console.log('fail',error)
 				});
 				
+				
 			}, false );
 			
-			
+			// html5新特性
+			navigator.geolocation.getCurrentPosition((position)=>{
+				console.log('HTML5新特性：',position)
+				let {coords} = position;
+				
+				// 创建Map实例
+				var map = new BMap.Map("bdmap");
+				// 创建地图实例  
+				var point = new BMap.Point(coords.longitude, coords.latitude);
+				// 创建点坐标  
+				// map.centerAndZoom('广州', 15);
+				
+				map.centerAndZoom(point, 19);
+			},()=>{
+				console.log('定位失败：',error)
+			})
 		</script>
 	</body>
 

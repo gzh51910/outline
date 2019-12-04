@@ -83,6 +83,9 @@
 		let btnCamera = document.querySelector('#btnCamera');
 		let btnSpeech = document.querySelector('#btnSpeech');
 		let btnGeolocation = document.querySelector('#btnGeolocation');
+		let btnContact = document.querySelector('#btnContact');
+		let btnFingerprint = document.querySelector('#btnFingerprint');
+		let btnShare = document.querySelector('#btnShare');
 		btnCamera.onclick = function(){
 			// 点击跳转(创建Webview+显示webview)
 			// plus.webview.create( 'html/camera.html', 'pageCamera');
@@ -96,6 +99,18 @@
 		
 		btnGeolocation.onclick = function(){
 			plus.webview.open( 'html/map.html', 'pageGeolocation', null, 'slide-in-right');
+		}
+		
+		btnContact.onclick = function(){
+			plus.webview.open( 'html/contact.html', 'pageContact', null, 'slide-in-right');
+		}
+		
+		btnFingerprint.onclick = function(){
+			plus.webview.open( 'html/fingerprint.html', 'pageFingerprint', null, 'slide-in-right');
+		}
+		
+		btnShare.onclick = function(){
+			plus.webview.open( 'html/share.html', 'pageShare', null, 'slide-in-right');
 		}
 	</script>
 </body>

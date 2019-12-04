@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<h1>指纹识别</h1>
+		<button class="mui-btn mui-btn-primary btnPay">支付</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			let btnPay = document.querySelector('.btnPay')
+			mui.init()
+			mui.plusReady(function () {
+				let {isEnrolledFingerprints,isSupport,authenticate,cancel} = plus.fingerprint
+				btnPay.onclick = ()=>{
+					if(isSupport()){
+						// 判断是否已经录入指纹
+						if(isEnrolledFingerprints()){
+							console.log('有指纹');
+							plus.nativeUI.showWaiting('请确认支付');
+							authenticate(()=>{
+								plus.nativeUI.toast('支付成功')
+								plus.nativeUI.closeWaiting();
+								cancel()
+							},()=>{
+								plus.nativeUI.toast('支付失败')
+								plus.nativeUI.closeWaiting();
+								cancel()
+							},{
+								message:'请确认支付'
+							})
+						}else{
+							plus.nativeUI.alert('请先录入指纹');
+						}
+					}else{
+						plus.nativeUI.alert('当前设备不支持指纹识别');
+					}
+				}
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

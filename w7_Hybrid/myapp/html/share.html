@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			img{width:100%;}
+		</style>
+	</head>
+	
+	<body>
+		<h1>分享</h1>
+		<img src="img/g3.jpg" id="meinv"/>
+		<button class="mui-btn mui-btn-primary btnShare">分享</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			let btnShare = document.querySelector('.btnShare')
+			let meinv = document.querySelector('#meinv')
+			mui.init()
+			mui.plusReady(function () {
+				let message = {
+					title:'震惊，网络上惊现买一送一活动',
+					content:'震惊，网络上惊现买一送一活动',
+					href:'http://offer.qfh5.cn',
+					type:'web',
+					// pictures:[meinv.src,'img/g1.jpg'],
+					// thumbs:[meinv.src,'img/g2.jpg']
+				}
+				btnShare.onclick = function(){
+					// plus.share.getServices((services)=>{
+					// 	console.log(services)
+					// 	
+					// 	// 弹出分享菜单
+					// 	let buttons = services.map(item=>{
+					// 		return {
+					// 			title:item.description
+					// 		}
+					// 	})
+					// 	plus.nativeUI.actionSheet(
+					// 		{
+					// 			title:"分享到",
+					// 			cancel:"取消",
+					// 			buttons
+					// 		},
+					// 		
+					// 		//点击菜单回调函数
+					// 		function(e){
+					// 			console.log("User pressed: "+e.index);
+					// 			if(e.index>0){
+					// 				// 获取当前服务
+					// 				let currentService = services[e.index-1];
+					// 				
+					// 				if(currentService.authenticated){
+					// 					//分享
+					// 					
+					// 					currentService.send(message,()=>{
+					// 						plus.nativeUI.toast('分享成功')
+					// 					})
+					// 				}else{
+					// 					// 申请授权
+					// 					currentService.authorize((service)=>{
+					// 						// 授权成功后分享
+					// 						
+					// 						currentService.send(message,()=>{
+					// 							plus.nativeUI.toast('分享成功')
+					// 						})
+					// 					})
+					// 				}
+					// 			}
+					// 			
+					// 		}
+					// 	);
+					// });
+					
+					// 系统分享
+					plus.share.sendWithSystem(message, ()=>{
+						plus.nativeUI.toast('分享成功')
+					});
+					
+				}
+			})
+			
+			
+		</script>
+	</body>
+
+</html>
