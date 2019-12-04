@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			body{margin:0;}
+			img,video{width:100%;}
+		</style>
+	</head>
+	
+	<body>
+		<h1>语音识别</h1>
+		<input type="search" id="keyword"/>
+		<button type="button" class="mui-btn mui-btn-primary mui-btn-outlined" id="btnSpeech">
+			<i class="mui-icon mui-icon-mic"></i> 语音
+		</button>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			let keword = document.querySelector('#keyword');
+			let btnSpeech = document.querySelector('#btnSpeech');
+			document.addEventListener( "plusready", ()=>{
+				
+				btnSpeech.onclick = ()=>{
+					// 获取摄像头对象
+					plus.speech.startRecognize( {
+						engine:'iFly'
+					}, (result)=>{
+						console.log(result);
+						keyword.value = result;
+					}, ()=>{
+						plus.nativeUI.toast('识别失败');
+					});
+					
+				}
+			}, false );
+			
+			
+		</script>
+	</body>
+
+</html>

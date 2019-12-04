@@ -81,12 +81,21 @@
 	<script type="text/javascript" charset="utf-8">
 	  	mui.init();
 		let btnCamera = document.querySelector('#btnCamera');
+		let btnSpeech = document.querySelector('#btnSpeech');
+		let btnGeolocation = document.querySelector('#btnGeolocation');
 		btnCamera.onclick = function(){
 			// 点击跳转(创建Webview+显示webview)
 			// plus.webview.create( 'html/camera.html', 'pageCamera');
 			// plus.webview.show( 'pageCamera', 'slide-in-right')
 			
 			plus.webview.open( 'html/camera.html', 'pageCamera', null, 'slide-in-right');
+		}
+		btnSpeech.onclick = function(){
+			plus.webview.open( 'html/speech.html', 'pageSpeech', null, 'slide-in-right');
+		}
+		
+		btnGeolocation.onclick = function(){
+			plus.webview.open( 'html/map.html', 'pageGeolocation', null, 'slide-in-right');
 		}
 	</script>
 </body>

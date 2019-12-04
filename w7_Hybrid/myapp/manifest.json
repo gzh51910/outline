@@ -37,7 +37,10 @@
         },
         "Speech": {
             "description": "管理语音识别插件"
-        }
+        },
+		"Geolocation": {
+			"description": "位置信息"
+		}
 	},
 	"plus": {
 		"splashscreen": {
