@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>支付功能</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.css" rel="stylesheet" />
+		<style>
+			.container{padding:15px;}
+			button.mui-btn{display:block;margin:10px 0;width:100%;}
+			.container img{width:100%}
+			.price span::before,.price del::before{content:'￥'}
+			.price span{color:#f00;}
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<img src="img/g1.jpg"/>
+			<h1>双12秒杀活动：不要998，也不要98，只要9.8，非洲姑娘带回家</h1>
+			<p class="price"><del>998</del> <span>9.8</span></p>
+			<button type="button" class="mui-btn mui-btn-danger btnBuy">立即购买</button>
+		</div>
+		<script src="../js/mui.js"></script>
+		<script type="text/javascript">
+			
+			mui.init()
+			mui.plusReady(function() {
+				let btnBuy = document.querySelector('.btnBuy');
+				let price = document.querySelector('.price span');
+				
+				// dcloud平台的支付接口(需要：payid,total,appid)
+				let paymentApi = 'http://demo.dcloud.net.cn/payment/?payid=';
+				
+				let actionsheetStyle = {};
+				let allChannels = [];
+				btnBuy.onclick = function(){
+					// 显示支付菜单
+					plus.nativeUI.actionSheet(actionsheetStyle, (e)=>{
+						if(e.index>0){
+							// 根据不同的支付方式,选择相应的支付通道
+							let currentChannel = allChannels[e.index-1];
+							
+							// 拼接支付方式: 'http://demo.dcloud.net.cn/payment/?payid=alipay'
+							paymentApi += currentChannel.id;
+							
+							// 判断当前支付是否可用
+							if (currentChannel.serviceReady) {
+								// 商品价格
+								paymentApi +='&total='+price.innerText*0.01;
+								
+								// appid
+								var appid = plus.runtime.appid;
+								paymentApi += '&appid='+appid
+							}
+							
+							// 通过以上拼接，得到完整接口地址地址
+							// 'http://demo.dcloud.net.cn/payment/?payid=alipy&total=9.8&appid=xxxx'
+							
+							// 原生JS
+							var xhr = new XMLHttpRequest();
+							// h5+接口
+							
+							// 显示loading
+							plus.nativeUI.showWaiting('正在支付')
+							
+							// var xhr = new plus.net.XMLHttpRequest();
+							xhr.onload = function(){
+								 var order = xhr.responseText; console.log('加密后信息:',order,currentChannel)
+								 
+								 // 调用支付接口,购买商品
+								 plus.payment.request(currentChannel,order,(result)=>{
+									 plus.nativeUI.toast('支付成功')
+									 console.log(result);
+									 
+									 // 关闭loading
+									 plus.nativeUI.closeWaiting();
+								 },(err)=>{
+									 console.log(err)
+									 plus.nativeUI.closeWaiting();
+								 })
+							}
+							xhr.open('get',paymentApi,true);
+							xhr.send()
+							
+							
+						}
+						
+					});
+				}
+				
+				// 获取支付通道,生成支付菜单
+				plus.payment.getChannels((channels)=>{
+					console.log('channels:',channels);
+					allChannels = channels
+					
+					var actionbuttons=channels.map(item=>{
+						return {title:item.description}
+					})
+					
+					actionsheetStyle={
+						title:"选择支付方式",
+						cancel:"取消",
+						buttons:actionbuttons,
+					};
+				});
+			})
+		</script>
+	</body>
+
+</html>

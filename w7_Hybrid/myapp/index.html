@@ -1,117 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-    <style>
-		img{width:100%;}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>基于webpack的React环境搭建</title>
 </head>
 <body>
-	<h1>H5+Api测试</h1>
-	<ul class="mui-table-view">
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-camera"></i>
-				<div class="mui-media-body" id="btnCamera">
-					摄像头
-					<p class='mui-ellipsis'>拍照、录像、二维码...</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-mic"></i>
-				<div class="mui-media-body" id="btnSpeech">
-					语音识别
-					<p class='mui-ellipsis'>语音转换文字...</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-map"></i>
-				<div class="mui-media-body" id="btnGeolocation">
-					定位
-					<p class='mui-ellipsis'>地图、订餐、附近的人...</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-contact"></i>
-				<div class="mui-media-body" id="btnContact">
-					通讯录
-					<p class='mui-ellipsis'>获取联系人，打电话，发短信...</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-spinner mui-spin"></i>
-				<div class="mui-media-body" id="btnFingerprint">
-					指纹
-					<p class='mui-ellipsis'>支付、解锁、打开</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-pengyouquan"></i>
-				<div class="mui-media-body" id="btnShare">
-					分享
-					<p class='mui-ellipsis'>分享到朋友圈、QQ空间、微博</p>
-				</div>
-			</a>
-		</li>
-		<li class="mui-table-view-cell mui-media">
-			<a href="javascript:;">
-				<i class="mui-media-object mui-pull-left mui-icon mui-icon-weixin"></i>
-				<div class="mui-media-body" id="btnPayment">
-					支付
-					<p class='mui-ellipsis'>支付宝支付、微信支付</p>
-				</div>
-			</a>
-		</li>
-	</ul>
-	
-    <script src="js/mui.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	  	mui.init();
-		let btnCamera = document.querySelector('#btnCamera');
-		let btnSpeech = document.querySelector('#btnSpeech');
-		let btnGeolocation = document.querySelector('#btnGeolocation');
-		let btnContact = document.querySelector('#btnContact');
-		let btnFingerprint = document.querySelector('#btnFingerprint');
-		let btnShare = document.querySelector('#btnShare');
-		btnCamera.onclick = function(){
-			// 点击跳转(创建Webview+显示webview)
-			// plus.webview.create( 'html/camera.html', 'pageCamera');
-			// plus.webview.show( 'pageCamera', 'slide-in-right')
-			
-			plus.webview.open( 'html/camera.html', 'pageCamera', null, 'slide-in-right');
-		}
-		btnSpeech.onclick = function(){
-			plus.webview.open( 'html/speech.html', 'pageSpeech', null, 'slide-in-right');
-		}
-		
-		btnGeolocation.onclick = function(){
-			plus.webview.open( 'html/map.html', 'pageGeolocation', null, 'slide-in-right');
-		}
-		
-		btnContact.onclick = function(){
-			plus.webview.open( 'html/contact.html', 'pageContact', null, 'slide-in-right');
-		}
-		
-		btnFingerprint.onclick = function(){
-			plus.webview.open( 'html/fingerprint.html', 'pageFingerprint', null, 'slide-in-right');
-		}
-		
-		btnShare.onclick = function(){
-			plus.webview.open( 'html/share.html', 'pageShare', null, 'slide-in-right');
-		}
-	</script>
-</body>
+    <div id="app"></div>
+<script type="text/javascript" src="main.js"></script></body>
 </html>

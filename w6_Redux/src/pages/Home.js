@@ -3,6 +3,8 @@ import {nsg} from '@/api';
 import { Carousel,Row,Col } from 'antd';
 import Goodslist from '@@/Goodslist';
 
+// import plusready from '../utils/plus'
+
 class Home extends Component{
     state = {
         recommed:[],
