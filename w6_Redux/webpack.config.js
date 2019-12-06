@@ -6,6 +6,9 @@ module.exports = {
         contentBase:path.join(__dirname,'./public'),
         port:8000
     },
+    output:{
+        publicPath:'/admin'
+    },
     resolve:{
         // 别名
         alias:{

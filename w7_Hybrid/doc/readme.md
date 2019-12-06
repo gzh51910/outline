@@ -31,3 +31,36 @@
         * gallary
         * nativeUI
         * webview
+        * speech
+        * share
+        * geolocation + 百度地图
+        * device
+        * Fingerprint
+        * Contact
+
+
+* 垃圾回收机制（自动）
+    * 引用计数      IE6
+    * 标记清除
+
+    ```js
+        (function(){
+            var a = 100;
+
+            function show(){
+                return a*a;
+            }
+
+            var obj1 = {name:'obj1'}
+            var obj2 = {name:'boj2'}
+
+            obj1.link = obj2.name;
+            obj2.link = obj1.name;
+
+
+            btn.onclick = function(){
+                //a
+            }
+
+        })()
+    ```
