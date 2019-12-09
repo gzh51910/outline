@@ -7,7 +7,7 @@ module.exports = {
         port:8000
     },
     output:{
-        publicPath:'/admin'
+        publicPath:'./'
     },
     resolve:{
         // 别名
