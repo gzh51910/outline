@@ -10,3 +10,5 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+
+.title{font-size:24px;font-weight:bold;}

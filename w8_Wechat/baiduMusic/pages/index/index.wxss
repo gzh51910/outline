@@ -1,0 +1,3 @@
+.slide-item{position:relative;}
+.slide-item image{width:100%;}
+.slide-item text{position: absolute;left:0;top:0;right:0;background-color:rgba(0,0,0,0.3);text-align: center;color:#fff;}

@@ -1,2 +1,12 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<text class="title">首页</text>
+<view>
+  <text>home</text>
+</view>
+<view>用户名：{{username}}</view>
+<view>
+  <view>学过的知识点：</view>
+  <view wx:for="{{category}}" class="item">{{index+1}} - {{item}}</view>
+</view>
+<button bindtap="addItem">添加</button>
+<button bindtap="addItem">分享</button>

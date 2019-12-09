@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/list/list",
-    "pages/home/home"
+    "pages/list/list"
   ],
   "window": {
     "navigationBarBackgroundColor": "#58bc58",
