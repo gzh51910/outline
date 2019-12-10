@@ -34,6 +34,75 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    category: [{
+      type: 1,
+      title: '新歌榜',
+      name: '新歌'
+    }, {
+      type: 2,
+      title: '热门歌曲',
+      name: '热歌'
+    }, {
+      type: 11,
+      title: '摇滚重金属',
+      name: '摇滚'
+    }
+      , {
+      type: 12,
+      title: '爵士音乐',
+      name: '爵士'
+    }
+      , {
+      type: 16,
+      title: '网络流行',
+      name: '流行'
+    }
+      , {
+      type: 21,
+      title: '欧美金曲榜',
+      name: '欧美'
+    }
+      , {
+      type: 22,
+      title: '经典老歌榜',
+      name: '老歌'
+    }
+      , {
+      type: 23,
+      title: '情歌对唱榜',
+      name: '情歌'
+    }
+      , {
+      type: 24,
+      title: '影视金曲榜',
+      name: '影视'
+    }
+      , {
+      type: 25,
+      title: '网络歌曲榜',
+      name: '网络'
+    }]
+  },
+  getData(options={}){
+    let { method = 'baidu.ting.billboard.billList',type,data={size:5,offset:0}} = options;
+    return new Promise((resolve,reject)=>{
+      wx.request({
+        url: 'http://tingapi.ting.baidu.com/v1/restserver/ting',
+        data: {
+          ...data,
+          method,
+          type,
+        },
+        success: ({
+          data
+        }) => {
+          resolve(data)
+        },
+        fail(){
+          reject()
+        }
+      })
+    })
+    
   }
 })

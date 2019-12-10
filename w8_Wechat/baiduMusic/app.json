@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/player/player",
     "pages/discover/discover",
     "pages/search/search",
+    "pages/player/player",
     "pages/logs/logs"
   ],
   "window": {

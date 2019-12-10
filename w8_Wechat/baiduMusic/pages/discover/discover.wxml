@@ -1,2 +1,10 @@
-<!--pages/discover/discover.wxml-->
-<text>pages/discover/discover.wxml</text>
+<import src="/template.wxml"/>
+
+<scroll-view>
+  <template is="list" data="{{datalist}}"/>
+  <view class="weui-loadmore" hidden='{{!loading}}'>
+    <view class="weui-loading"></view>
+    <view class="weui-loadmore__tips">正在加载</view>
+  </view>
+  <view wx:if="{{!hasMore}}">我是有底线的</view>
+</scroll-view>

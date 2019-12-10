@@ -17,5 +17,26 @@
 * 切后台
 * 导航
     * 声明式导航
-        * navigator
+        * `<navigator/>`
     * 编程式导航
+        * wx.navigateTo
+* 页面类型
+    * 普通页面
+        * wx.navigateTo
+        * wx.redirectTo
+    * tabar页面
+        * wx.switchTab
+        * wx.reLaunch
+
+
+## day8-2
+
+* 防抖与节流
+    > 为了优化页面性能
+    * 防抖：只执行最后一次，忽略之前的所有操作
+        * 百度搜索建议
+        * js动画
+    * 节流：执行第一次，忽略后面所有操作
+        * 滚动加载
+
+debugger;
