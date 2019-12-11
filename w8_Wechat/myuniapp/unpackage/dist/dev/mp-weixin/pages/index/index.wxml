@@ -1,0 +1,1 @@
+<view class="content" bind:__l="__l"><view class="_h1">Uni-app测试2</view><image class="logo _img" src="/static/logo.png"></image><view><text class="title">{{title}}</text></view></view>

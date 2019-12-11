@@ -127,5 +127,13 @@ Page({
     wx.navigateTo({
       url: '/pages/search/search?keyword=' + keyword
     })
+  },
+  onShareAppMessage: function () {
+    // 获取用户信息（用户名，二维码等信息），并利用Canvas拼接图片，并保存
+    return {
+      title:'老谢的分享',
+      imageUrl:'cloud://qf-52690b.7166-qf-52690b-1257864894/g3.jpg',
+      path:'/pages/index/index'
+    }
   }
 })

@@ -1,1 +1,2 @@
 /* pages/player/player.wxss */
+.play-btn button{width:80%}

@@ -1,2 +1,31 @@
-<!--pages/player/player.wxml-->
-<text>pages/player/player.wxml</text>
+<import src="/template.wxml"/>
+<view>
+  <!-- 歌曲图片 -->
+  <view class="player">
+    <image src="{{info.pic_huge}}"></image>
+  </view>
+
+  <!-- 歌曲信息 -->
+  <view class="weui-panel">
+    <view class="weui-panel__hd">歌曲信息</view>
+    <view class="weui-panel__bd">
+      <view class="weui-media-box weui-media-box_text">
+        <view class="weui-media-box__title weui-media-box__title_in-text">{{info.title}}</view>
+        <view class="weui-media-box__desc">{{info.si_proxycompany}}</view>
+        <view class="weui-media-box__info">
+          <view class="weui-media-box__info__meta">歌手：{{info.author}}</view>
+          <view class="weui-media-box__info__meta">专辑：{{info.album_title}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 播放 -->
+  <view style="padding:50rpx 20rpx" class="play-btn">
+    <button class="weui-btn" type="primary" plain="true" bindtap='handlePlay' wx:if="{{info.free===1}}">{{paused ? '播放': '暂停'}}</button>
+    <button class="weui-btn" type="primary" plain="true" disabled wx:else>由于版权问题无法播放</button>
+    <button class="weui-btn" type="primary" plain="true" bindtap='handleDownload'>歌词下载</button>
+  </view>
+
+  <template is="panel" data="{{datalist:recommends,title:'推荐列表'}}"></template>
+</view>
